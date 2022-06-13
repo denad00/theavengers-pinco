@@ -1,0 +1,40 @@
+body{
+	text-align: center;
+	background: #00ECB9;
+  font-family: monospace;
+}
+
+h1{
+  color: #396;
+  font-size: 2rem;
+  margin: 2rem;
+}
+
+#clockdiv, label, input, button, #timeOutput {
+	color: black;
+	display: inline-block;
+	text-align: center;
+	font-size: 1rem;
+  padding: 1rem;
+}
+
+label {
+  background: #00BF96;
+  border-radius: 3px;
+}
+
+#clockdiv > div{
+	padding: 1rem;
+	border-radius: 3px;
+	display: inline-block;
+  background: #00BF96;
+}
+
+#clockdiv div > span{
+	padding: 1rem;
+	border-radius: 3px;
+	background: #00816A;
+	display: inline-block;
+}
+
+
