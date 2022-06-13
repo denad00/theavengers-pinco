@@ -30,7 +30,7 @@ const handleCancel = () => {
     timeOutput.innerHTML = "";
 };
 
-// Trigger handleClear on button click
+// Trigger handleCancel on button click
 cancelButton.addEventListener("click", handleCancel);
 
 function getCurrentTime() {
