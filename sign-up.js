@@ -1,24 +1,6 @@
 
 const db = firebase.firestore();
 
-// class User {
-//     constructor (name, phone, email) {
-//        this.fullName = name;
-//        this.phone = phone;
-//        this.email = email;
-//      }
-// }
-
-// let userArray = [];
-
-
-// signUp.addEventListener ("click", () => {
-//     let user = new User (fullName.value, phone.value, email.value)
-//     userArray.push(user);
-//     console.log(userArray)
-//     const outcome = db.collection("user").add(user)
-// })
-
 const user = [];
 
 signUp.addEventListener ("click", () => {
@@ -27,6 +9,7 @@ signUp.addEventListener ("click", () => {
     phone: phone.value,
     email: email.value,
     emergencyContact: "",
+    userID: Math.floor(Math.random() * Math.floor(Math.random() * Date.now()))
     
   }
   console.log(user);
