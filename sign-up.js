@@ -1,38 +1,34 @@
 
-<script type="module">
-    
-  const firebaseConfig = {
-  apiKey: "AIzaSyBybnwAFnoIbIbxbOQMLEHOaiO796YviRY",
-  authDomain: "langara-wmdd4885-avengers.firebaseapp.com",
-  databaseURL: "https://langara-wmdd4885-avengers-default-rtdb.firebaseio.com",
-  projectId: "langara-wmdd4885-avengers",
-  storageBucket: "langara-wmdd4885-avengers.appspot.com",
-  messagingSenderId: "1078303270426",
-  appId: "1:1078303270426:web:d7a2c3b43fd70e113053a3",
-  measurementId: "G-F4KJKNQE5T"
-};
-
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
-
 const db = firebase.firestore();
 
-class User {
-    constructor (name, phone, email) {
-       this.fullName = name;
-       this.phone = phone;
-       this.email = email;
-     }
-}
+// class User {
+//     constructor (name, phone, email) {
+//        this.fullName = name;
+//        this.phone = phone;
+//        this.email = email;
+//      }
+// }
 
-let userArray = [];
+// let userArray = [];
 
+
+// signUp.addEventListener ("click", () => {
+//     let user = new User (fullName.value, phone.value, email.value)
+//     userArray.push(user);
+//     console.log(userArray)
+//     const outcome = db.collection("user").add(user)
+// })
+
+const user = [];
 
 signUp.addEventListener ("click", () => {
-    let newUser = new User (fullName.value, phone.value, email.value)
-    userArray.push(newUser);
-    console.log(userArray)
-    db.collection("user").add("name")
+  const user = {
+    name: fullName.value,
+    phone: phone.value,
+    email: email.value,
+    emergencyContact: "",
+    
+  }
+  console.log(user);
+  const outcome = db.collection("user").add(user)
 })
-
