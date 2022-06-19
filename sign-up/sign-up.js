@@ -13,5 +13,11 @@ signUp.addEventListener ("click", () => {
     
   }
   console.log(user);
-  const outcome = db.collection("user").add(user)
-})
+  const outcome = db.collection("user").add(user);
+  
+ Notification.requestPermission().then((result) => {
+ if (result === 'granted') {
+     randomNotification();
+  }
+ }
+});
