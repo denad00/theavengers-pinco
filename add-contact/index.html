@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>  
+<!--     <script>					// copy paste from    settings of your project page
+        
+     </script> -->
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <!-- SPA setting -->
+    <header class="headerbar">
+      <h1>Pin.Co</h1>
+    </header>
+    <div class="toolbar">
+      <!-- header area shared among all pages. It also include navigation buttons -->
+      <a href="#page1">Contact</a>
+      <a href="#page2">Edit</a>
+      <a href="#page3">Create</a>
+    </div>
+    <div class="page" id="page1" class="page">
+      <h2>Emergency contacts</h2>
+      <div id="emergencyContactsOutput"></div>
+      <h2>Other saved Contacts</h2>
+      <div id="otherContactsOutput"></div>
+    </div>
+    <div class="page" id="page2" class="page">
+      <h3>Here is contents of page 2</h3>
+    </div>
+    <div class="page" id="page3" class="page">
+      <h2>Contact</h2>
+      <p>When you activate emergency SOS button, it sends a message with your current location to your emergency contacts via SMS. </p>
+      <div class="contactCard">
+        <h3>Contact</h3>
+        <form action="#" method="get">
+        <label for="contactName">Name</label>
+        <input id="contactName" type="text">
+        <label for="contactPhone">Phone number</label>
+        <input id=contactPhone type="text">
+        <div>
+        <input type="checkbox" id="emergencyAccept" name="" value="">
+        <label for="emergencyAccept"> Emergency contact</label><br>
+        </div>
+          <div class="submitArea">
+         <button type="reset" value="Reset">Cancel</button>
+        <button type="submit" value="Submit" id="contactSubmit">Confirm</button>
+         </div>
+        </form>
+        
+      </div>
+    </div>
+
+    </div>
+  </body>
+</html>

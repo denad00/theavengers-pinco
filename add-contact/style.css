@@ -1,0 +1,83 @@
+
+body {
+height: 100vh;
+margin: 0;
+font-family: Tahoma;
+}
+
+h1 {
+color:white;
+text-align:center;
+}
+
+h1,h2 {
+font-weight: 300;
+}
+
+h2 {
+border-bottom:2px dotted black;
+padding-bottom: .2rem;
+}
+
+
+.headerbar {
+position: sticky;
+height: var(--header-h);
+background-color: rgb(51,51,51);
+display: flex;
+flex-wrap: nowrap;
+justify-content: center;
+}
+
+.toolbar a {
+background-color: rgb(97,128,251);
+text-decoration: none;
+color: white;
+line-height: 2.5em;
+margin: 1rem;
+padding:.2rem .5rem;
+text-align: center;
+border: 2px solid rgb(97,128,251);
+border-radius: 5px;
+}
+
+.toolbar a:active {
+background-color: #a50;
+}
+
+div.page {
+display: none;
+padding: 0.44em;
+height: calc(100vh - 5.7em);
+
+}
+
+body div.page:nth-child(odd) {
+background-color: white;
+}
+body div.page:nth-child(even) {
+background-color: white;
+}
+
+button {
+background-color: rgb(97,128,251);
+text-decoration: none;
+color: white;
+border:none;
+border-radius: 5px;
+padding:.2rem .5rem;
+}
+
+form {
+display:flex;
+flex-flow: column nowrap;
+}
+.submitArea {
+padding:1rem;
+}
+
+.contactCard {
+border-radius: 15px;
+background-color: rgb(245,245,245);
+padding: 1rem;
+}
