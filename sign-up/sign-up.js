@@ -19,5 +19,5 @@ signUp.addEventListener ("click", () => {
  if (result === 'granted') {
      randomNotification();
   }
- }
+ });
 });
