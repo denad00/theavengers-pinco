@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SignUp Page</title>
-    <script src="sign-up.js" defer></script>
+    <title>Login Page</title>
+    <script src="login.js" defer></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script>					
@@ -15,20 +15,13 @@
         };
        firebase.initializeApp(firebaseConfig); 
      </script>
-</head> 
-
+</head>
 <body>
     <form action="#" method="get">
-        <h2>Sign Up</h2>
-        <p id="errorMessage"></p>
+        <h2>Login</h2>
         <label>
-            Full Name:
-            <input type="text" id="fullName" placeholder="Full Name" required>
-        </label>
-
-        <label>
-            Email Address:
-            <input type="email" id="email" required>
+            Username:
+            <input type="text" id="username" placeholder="Email" required>
         </label>
 
         <label for="phone">
@@ -37,20 +30,14 @@
         </label>
 
         <label>
-            Password:
-            <input type="password" id="password" placeholder="Password" required>
+            Email Address:
+            <input type="email" id="email" required>
         </label>
 
-        <label>
-            Confirm Password:
-            <input type="password" id="confirmPassword" placeholder=" Confirm Password" required>
-        </label>
-
-        <button type="button" id="signUp">Create Account</button>
+        <button type="button" id="signUp">Sign Up</button>
         </label>
     </form>
 
-    <p>Already have an account? <a href="login.html">Sign in here</a></p>
-  
+    <p>Dont have an account? <a href="sign-up.html">Sign up here</a></p>
 </body>
 </html>
