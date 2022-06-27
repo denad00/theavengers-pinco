@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SignUp Page</title>
+    <title>Sign Up Page</title>
     <script src="sign-up.js" defer></script>
+    <link rel="stylesheet" href="sign-up.css">
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script>					
@@ -15,11 +16,19 @@
         };
        firebase.initializeApp(firebaseConfig); 
      </script>
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;700&family=Work+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 </head> 
 
 <body>
+    <header>
+        <img src="" alt="">
+    </header>
+
+    <main>    
     <form action="#" method="get">
-        <h2>Sign Up</h2>
+        <h2>Create your Pin.Co Account</h2>
         <p id="errorMessage"></p>
         <label>
             Full Name:
@@ -50,7 +59,19 @@
         </label>
     </form>
 
+    <p>* required</p>
+
     <p>Already have an account? <a href="login.html">Sign in here</a></p>
+</main>
+
+<footer>
+    <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms & Conditions</a></li>
+    </ul>
+    <p>Copyright© 2022 Pin.Co All rights reserved. </p>
+</footer>
+
   
 </body>
 </html>
