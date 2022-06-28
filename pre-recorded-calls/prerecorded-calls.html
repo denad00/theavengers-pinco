@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pre-Recorded Calls</title>
+    <link rel="stylesheet" href="prerecorded-calls.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css' integrity='sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==' crossorigin='anonymous' referrerpolicy='no-referrer' />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;700&family=Work+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+
+    </header>
+
+    <main>
+    <h1 class="caller-name">Call</h1>
+
+    <div class="call-container">
+        <div class="call-info">
+           <div class="progress-container">
+            <div class="progress"></div>
+           </div>
+
+        </div>
+
+        <audio src="calls/03 - Dive.mp3" id="audio">
+
+        </audio>
+
+        <div class="play-navigation ">
+            <button id="prev" class="action-btn">
+                <i class="fa-solid fa-backward"></i>
+            </button>
+            <button id="play" class="action-btn">
+                <i class="fa-solid fa-play"></i>
+            </button>
+            <button id="next" class="action-btn">
+                <i class="fa-solid fa-forward"></i>
+            </button>
+        </div>
+
+        <div class="navigation">
+            <button id="close" class="action-btn">
+                <i class="fa-solid fa-x"></i>
+            </button>
+            <button id="sos" class="action-btn">
+                <i class="fa-solid fa-circle-info"></i>
+            </button>
+            <button id="speaker" class="action-btn">
+                <i class="fa-solid fa-volume-high"></i>
+            </button>
+        </div>
+    </div>
+
+</main>
+    
+    <script src="prerecorded-calls.js"></script>
+</body>
+</html>
