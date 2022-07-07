@@ -1,5 +1,6 @@
 
 const db = firebase.firestore();
+
 const signUp = document.getElementById('signUp');
 const error = document.getElementById('errorMessage');
 const userFirebase = db.collection("user");
@@ -9,7 +10,6 @@ const user = [];
 const userStatus = [];
 
 signUp.addEventListener ("click", () => {
-
   if (password.value !== confirmPassword.value){
     error.innerHTML = "Passwords do not match, please try again";
 
@@ -20,17 +20,19 @@ signUp.addEventListener ("click", () => {
       phone: phone.value,
       email: email.value,
       password: password.value,
-      userID: Math.floor(Math.random() * Math.floor(Math.random() * Date.now()))
+      userID: Math.floor(Math.random() * Math.floor(Math.random() * Date.now())),
+      emergencyContactID: "",
       
     }
 
     const userStatus = {
-      name: user.name,
-      userId: user.userID,
+      email: user.email,
+      userID: user.userID,
       time: new Date(),
       longitutde: "",
       latitude: "",
-      sosEvent: false
+      sosEvent: false,
+      tokenID: "",
     }
 
     console.log(user);
@@ -40,8 +42,12 @@ signUp.addEventListener ("click", () => {
 
     Notification.requestPermission().then((result) => {
       if (result === 'granted') {
-          randomNotification();
        }
       });
+
+    setTimeout(function(){
+      location.href = "homepage.html";
+      }, 2000); 
   }
 });
+
