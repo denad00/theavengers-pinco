@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Page</title>
+    <link rel="stylesheet" href="sign-up.css">
+    <script src="main.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script>					
+        const firebaseConfig = { 
+            apiKey: "AIzaSyBybnwAFnoIbIbxbOQMLEHOaiO796YviRY",
+            authDomain: "langara-wmdd4885-avengers.firebaseapp.com",
+            databaseURL: "https://langara-wmdd4885-avengers-default-rtdb.firebaseio.com",
+            projectId: "langara-wmdd4885-avengers",
+            storageBucket: "langara-wmdd4885-avengers.appspot.com",
+            messagingSenderId: "1078303270426",
+            appId: "1:1078303270426:web:d7a2c3b43fd70e113053a3",
+            measurementId: "G-F4KJKNQE5T"
+        };
+       firebase.initializeApp(firebaseConfig); 
+     </script>
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;700&family=Work+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+</head> 
+
+<body>
+    <header>
+        <img src="" alt="">
+    </header>
+
+    <main>    
+    <form action="#" method="get">
+        <h2>Create your Pin.Co Account</h2>
+        <p id="errorMessage"></p>
+        <label>
+            Full Name*:
+            <input type="text" id="fullName" placeholder="Full Name" required>
+        </label>
+
+        <label>
+            Email Address*:
+            <input type="email" id="email" required>
+        </label>
+
+        <label for="phone">
+            Phone Number*:
+            <input type="tel" id="phone" required>
+        </label>
+
+        <label>
+            Password*:
+            <input type="password" id="password" placeholder="Password" required>
+        </label>
+
+        <label>
+            Confirm Password*:
+            <input type="password" id="confirmPassword" placeholder=" Confirm Password" required>
+        </label>
+
+        <button type="button" id="signUp">Create Account</button>
+    </form>
+
+    <p>* required</p>
+
+    <p>Already have an account? <a href="login.html">Sign in here</a></p>
+</main>
+
+<footer>
+    <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms & Conditions</a></li>
+    </ul>
+    <p>Copyright© 2022 Pin.Co All rights reserved. </p>
+</footer>
+
+
+</body>
+</html>

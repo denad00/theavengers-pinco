@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <script src="login.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script>					
+        const firebaseConfig = { 
+            apiKey: "AIzaSyBybnwAFnoIbIbxbOQMLEHOaiO796YviRY",
+            projectId: "langara-wmdd4885-avengers"
+        };
+       firebase.initializeApp(firebaseConfig); 
+     </script>
+</head>
+<body>
+    <form action="#" method="get">
+        <h2>Login</h2>
+        <label>
+            Username:
+            <input type="text" id="username" placeholder="Email" required>
+        </label>
+
+        <label for="phone">
+            Phone Number:
+            <input type="tel" id="phone" required>
+        </label>
+
+        <label>
+            Email Address:
+            <input type="email" id="email" required>
+        </label>
+
+        <button type="button" id="signUp">Sign Up</button>
+        </label>
+    </form>
+
+    <p>Dont have an account? <a href="sign-up.html">Sign up here</a></p>
+</body>
+</html>
