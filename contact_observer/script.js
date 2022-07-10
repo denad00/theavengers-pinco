@@ -6,6 +6,7 @@ import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-
 // Add Firebase products that you want to use
 import { getMessaging , getToken, onMessage, deleteToken } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-messaging.js'
 
+import { getFirestore, doc, updateDoc, collection, query, where, getDocs, arrayUnion } from 'https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js';
 
     const firebaseConfig = {
         apiKey: "AIzaSyBybnwAFnoIbIbxbOQMLEHOaiO796YviRY",
@@ -17,15 +18,31 @@ import { getMessaging , getToken, onMessage, deleteToken } from 'https://www.gst
         appId: "1:1078303270426:web:d7a2c3b43fd70e113053a3",
         measurementId: "G-F4KJKNQE5T"
     };
-  // Retrieve Firebase Messaging object.
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
+  // Retrieve Firebase init objects.
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
   const messaging = getMessaging(app);
+  const db = getFirestore(app);
 
   // IDs of divs that display registration token UI or request permission UI.
   const tokenDivId = 'token_div';
   const permissionDivId = 'permission_div';
 
+
+  const queryString = window.location.search;
+  const queryParams = new URLSearchParams(queryString);
+  const userId = queryParams.get("userId");
+  console.log(`userId: ${userId}`);
+  let userStatusDocId = null;
+  // Retrieve userStatus document in Firestore with queryParams in URL
+  const queryUserStatus = query(collection(db, "userStatus"), where("userID", "==", userId));
+  const querySnapshot = await getDocs(queryUserStatus);
+    querySnapshot.forEach((docRef) => {
+    // doc.data() is never undefined for query doc snapshots
+        console.log(docRef.id, " => ", docRef.data());
+        userStatusDocId = docRef.id;
+    });
+  console.log(userStatusDocId);
   // Handle incoming messages. Called when:
   // - a message is received while the app has focus
   // - the user clicks on an app notification created by a service worker
@@ -73,7 +90,13 @@ import { getMessaging , getToken, onMessage, deleteToken } from 'https://www.gst
     if (!isTokenSentToServer()) {
       console.log('Sending token to server...');
       // TODO(developer): Send the current token to your server.
-      setTokenSentToServer(true);
+    const userStatusDocRef = doc(db, "userStatus", userStatusDocId);
+    updateDoc(userStatusDocRef, {
+        observerTokens: arrayUnion(currentToken)
+      }).then(function() {
+        setTokenSentToServer(true);
+      });
+      
     } else {
       console.log('Token already sent to server so won\'t send it again ' +
           'unless it changes');
