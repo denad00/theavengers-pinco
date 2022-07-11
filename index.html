@@ -1,26 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Pinco</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href="css/style.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homepage</title>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script>
+    const firebaseApp = firebase.initializeApp({ 
+apiKey: "AIzaSyBybnwAFnoIbIbxbOQMLEHOaiO796YviRY",
+projectId: "langara-wmdd4885-avengers"
+});
+    const db = firebaseApp.firestore();
+    const auth = firebaseApp.auth();
+</script>
+  <script src="js/scripts.js" defer></script>
 </head>
+
 
 <body>
   <header>
 
+    <nav>
+      <ul>
+        <li><a href="#" id="logout">Logout</a></li>
+      </ul>
+    </nav>
+
   </header>
   <main class="container">
+
 
   </main>
   <footer class="footer">
 
   </footer>
-  <script src="https://www.gstatic.com/firebasejs/9.8.3/firebase-compat.js"></script>
-  <script type="text/javascript" src="js/scripts.js" defer></script>
 </body>
 
 </html>
