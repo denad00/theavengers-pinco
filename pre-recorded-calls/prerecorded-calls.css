@@ -44,3 +44,11 @@ button a {
     text-decoration: none;
     color: white;
 }
+
+#speaker {
+    background-color: white;
+}
+
+#speaker i {
+    color: black;
+}

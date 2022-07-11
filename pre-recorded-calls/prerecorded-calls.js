@@ -8,10 +8,10 @@ const progressContainer = document.querySelector('.progress-container');
 const callerName = document.querySelector('.caller-name');
 
 // Call titles
-const songs = ['03 - Dive', '3 I Did Something Bad'];
+const songs = ['03 - Dive', '3 I Did Something Bad', 'Danika'];
 
 // How to keep track of songs
-let callIndex = 1;
+let callIndex = 2;
 
 // Initially load songs
 loadSong(songs[callIndex]);
