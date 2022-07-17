@@ -5,8 +5,6 @@
     projectId: "langara-wmdd4885-avengers"
   });
 
-  console.log(firebaseApp)
-
   const db = firebaseApp.firestore();
   const auth = firebaseApp.auth();
 
@@ -29,6 +27,7 @@
       const password = document.getElementById('password').value;
 
       auth.signInWithEmailAndPassword(email, password).then((res) => {
+        window.location.replace('index.html');
         console.log(res);
       }).catch((error) => {
         console.log(error.code);
@@ -71,7 +70,7 @@
         
       }
     document.getElementById('sign-in').addEventListener('click', login, false);
-    document.getElementById('sign-up').addEventListener('click', register, false);
+    //document.getElementById('sign-up').addEventListener('click', register, false);
   })};
 
   window.onload = function() {
