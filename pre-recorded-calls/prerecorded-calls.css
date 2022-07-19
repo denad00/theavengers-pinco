@@ -1,0 +1,46 @@
+main {
+    font-family: "Work Sans";
+    margin: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap: 1.5rem;
+    background-color: black;
+}
+
+h1 {
+    font-family: "Baloo 2";
+    color: white;
+}
+
+.call-container {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1rem;
+}
+
+.play-navigation, .navigation {
+    display: flex;
+    justify-content: space-between;
+}
+
+.action-btn {
+    border-radius: 50%;
+    font-size: 3rem;
+    padding: 1rem;
+    background-color: black;
+    color: white;
+    box-shadow: none;
+    border: 1px solid white;
+}
+
+.action-btn:hover{
+    cursor: pointer;
+}
+
+button a {
+    text-decoration: none;
+    color: white;
+}
