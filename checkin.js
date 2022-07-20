@@ -34,7 +34,7 @@ const handleSubmit = (event) => {
         fullTime.setMinutes(checkInTime[1]);
         fullTime.setSeconds(0);
         checkInTime = fullTime;
-        createNewCheckInSession("iristest0001", checkInTime);
+        createNewCheckInSession("ictestnotif01", checkInTime);
         console.log(checkInTime);
         document.getElementById("cancelButton").style.display = 'inline';
         document.getElementById("createTimer").style.display = 'none';
