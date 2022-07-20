@@ -27,11 +27,11 @@
     if (firebaseApp.auth().currentUser) {
       firebaseApp.auth().signOut();
     } else {
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
+      const email = document.getElementById('signin-email').value;
+      const password = document.getElementById('signin-password').value;
 
       auth.signInWithEmailAndPassword(email, password).then((res) => {
-        //window.location.replace('index.html');
+        window.location.replace('index.html');
         console.log(res);
       }).catch((error) => {
         console.log(error.code);
@@ -57,30 +57,21 @@
    
   };
 
-  const readData = () => {
-    db.collection('users').get().then((data) => {
-      console.log(data.docs.map((item) => {
-        return {...item.data(), id: item.id };
-      }));
-    })
-  }
-
   const initializeApp = () => {
     firebaseApp.auth().onAuthStateChanged(function(user) {
       if (user) {
-        console.log(user)
+        window.location.replace('index.html');
       }
       else{
-        console.log(user)
-        //
+
       }
       
-      if(document.getElementById('sign-in')) {
-        document.getElementById('sign-in').addEventListener('click', login, false);
+      if(document.getElementById('signin')) {
+        document.getElementById('signin').addEventListener('click', login, false);
       }
 
-      if(document.getElementById('sign-up')) {
-        document.getElementById('sign-up').addEventListener('click', register, false);
+      if(document.getElementById('signup')) {
+        document.getElementById('signup').addEventListener('click', register, false);
       }
     
   })};
