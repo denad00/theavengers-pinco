@@ -1,0 +1,240 @@
+#signin-page, #signup-page {
+    background-image: url('../../img/pin.co_background_graident-04.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    // background-color: rgb(255, 212, 133);
+ }
+
+ header {
+    display: flex;
+    gap: .75rem;
+    padding: 1rem 4%;
+
+    svg {
+        max-width: 10%;
+    }
+
+    h1 {
+        display: flex;
+        align-items: center;
+        font-size: 1.5rem;
+        color: $font-color-light;
+    }
+ }
+
+.signup {
+    margin: auto;
+    background-color:  $background-color-light;
+    border-radius: 40px;
+    height: 641px;
+    width: 337px;
+    box-shadow: 3px 3px 3px $box-shadow-color;
+
+    svg {
+        height: 80px;
+        width: 80px;
+        display: flex;
+        padding-top: 1rem;
+        margin: auto;
+    }
+
+    form {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: .5rem;
+        margin: 0 15%;
+
+        h3 {
+            text-align: center;
+        }
+
+        label {
+            display: flex;
+            flex-flow: column nowrap;
+        }
+
+        input {
+            height: 36px;
+            width: 248px;
+        }
+
+        button {
+            background-color: $color-main-dark;
+            color: $font-color-light;
+            box-shadow: none;
+            border: none;
+            height: 40px;
+            width: 248px;
+        }
+    }
+
+    p {
+        text-align: center;
+        margin: 1rem 15%;
+        font-size: .75rem;
+
+        a {
+            color: $font-color-dark;
+        }
+    }
+ }
+
+ .signin {
+    margin: auto;
+    background-color:  $background-color-light;
+    border-radius: 40px;
+    height: 531px;
+    width: 337px;
+    box-shadow: 3px 3px 3px $box-shadow-color;
+
+    svg {
+        height: 80px;
+        width: 80px;
+        display: flex;
+        padding-top: 1rem;
+        margin: auto;
+    }
+
+    form {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 1rem;
+        margin: 0 15%;
+
+        h3 {
+            text-align: center;
+        }
+
+        label {
+            display: flex;
+            flex-flow: column nowrap;
+        }
+
+        input {
+            height: 36px;
+            width: 248px;
+        }
+
+        button {
+            background-color: $color-main-dark;
+            color: $font-color-light;
+            box-shadow: none;
+            border: none;
+            height: 40px;
+            width: 248px;
+        }
+    }
+
+    p {
+        text-align: center;
+        margin: 1rem 15%;
+        font-size: .75rem;
+
+        a {
+            color: $font-color-dark;
+        }
+    }
+ }
+
+ footer {
+    margin: 2rem 15%;
+    padding-top: 4rem;
+
+    ul {
+        padding-inline-start: 0;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+
+        li {
+            list-style-type: none;
+            font-size: .65rem;
+
+            a {
+                text-decoration: none;
+                color: $font-color-dark;
+            }
+        }
+    }
+
+    p {
+        font-size: .65rem;
+        text-align: center;
+    }
+    
+ }
+
+ @media screen and (min-width: 800px){
+.signup{
+    height: 782px;
+    width: 800px;
+
+    svg {
+        height: 160px;
+        width: 160px;
+        display: flex;
+        padding-top: 1rem;
+        margin: auto;
+    }
+
+    form {
+        gap: 1rem;
+        h3 {
+            font-size: 2rem;
+        }
+
+        label {
+            margin: auto;
+
+            input {
+            height: 36px;
+            width: 400px
+            }
+        }
+
+        button {
+            margin: auto;
+            height: 36px;
+            width: 400px;
+        }
+    }
+ }
+
+ .signin{
+    height: 666px;
+    width: 686px;
+    
+    svg {
+        height: 160px;
+        width: 160px;
+        display: flex;
+        padding-top: 1rem;
+        margin: auto;
+    }
+    
+    form {
+        gap: 1rem;
+
+        h3 {
+            font-size: 2rem;
+        }
+    
+        label {
+            margin: auto;
+    
+            input {
+            height: 36px;
+            width: 400px
+            }
+        }
+    
+        button {
+            margin: auto;
+            height: 36px;
+            width: 400px;
+        }
+        }
+     }
+ }
+

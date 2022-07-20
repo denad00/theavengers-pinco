@@ -8,7 +8,7 @@ const progressContainer = document.querySelector('.progress-container');
 
 
 // Call titles
-const songs = ['03 - Dive', '3 I Did Something Bad'];
+const songs = ['Clara', 'Danika', 'Giancarlo', 'Harshit', 'Iris', 'Joanne', "YuenKi"];
 
 // How to keep track of songs
 let callIndex = 1;
