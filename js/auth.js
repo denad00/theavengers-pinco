@@ -25,7 +25,7 @@
       const password = document.getElementById('password').value;
 
       auth.signInWithEmailAndPassword(email, password).then((res) => {
-        window.location.replace('index.html');
+        //window.location.replace('index.html');
         console.log(res);
       }).catch((error) => {
         console.log(error.code);
@@ -62,10 +62,11 @@
   const initializeApp = () => {
     firebaseApp.auth().onAuthStateChanged(function(user) {
       if (user) {
-
+        console.log(user)
       }
       else{
-        window.location.replace('/index.html');
+        console.log(user)
+        //
       }
       
       if(document.getElementById('sign-in')) {
