@@ -39,7 +39,7 @@
       console.warn('Service Worker not available');
     }
   </script>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="sass/style.css">
   <link rel="stylesheet" href="prerecorded-calls-homepage.css">
   <link rel="stylesheet" href="prerecorded-calls.css">
 
@@ -56,21 +56,22 @@
     const auth = firebaseApp.auth();
   </script>
   <script src="js/scripts.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;700&family=Work+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
 
-<body>
+<body id="homepage">
   <header class="headerbar">
-    <img src="img/desktop-icon-topbar-500ppi.png" alt="">
-    <div id="sosButton"><a href="#page0">SOS</a></div>
+      <div class="header-logo">
+        <h1>Pin.Co</h1>
+      </div>
 
-    <nav>
-      <ul>
-        <li><a href="#" id="logout">Logout</a></li>
-      </ul>
-    </nav>
+      <div id="sosButton">
+        <a href="#page0">SOS</a>
+      </div>
 
   </header>
+
   <div class="nav-bar" id="menu">
     <button id="menu_toggle" title="main menu">☰</button>
     <!-- header area shared among all pages. It also include navigation buttons -->
@@ -80,6 +81,7 @@
     <a href="#page4">Contact</a>
     <a href="#page5">My Profile</a>
     <a href="#page6">Location</a>
+      <a href="#" id="logout">Logout</a>
   </div>
   <!--     page 1 --- your location -->
   <div class="page" id="page1">
@@ -127,15 +129,20 @@
   <!--     page 3 --- call simulation -->
   <div class="page" id="page3">
     <div class="simulation-title">
-      <h2>Call Simulation</h2>
-      <p>Choose one recording from a list of our voices!</p>
+        <h1>Call Simulation</h1>
+        <p>Choose one recording from a list of our voices!</p>
     </div>
 
     <div class="call-list">
-      <ul>
-        <li><a href="prerecorded-calls.html"><i class="fa-solid fa-play"></i>Dive</a></li>
-        <li><a href="prerecorded-calls.html"><i class="fa-solid fa-play"></i>I Did Something Bad</a></li>
-      </ul>
+        <ul>
+            <li><a href="prerecorded-calls.html"><i class="fa-solid fa-play"></i>Danika</a></li>
+            <li><a href="prerecorded-calls.html"><i class="fa-solid fa-play"></i>Iris</a></li>
+            <li><a href="prerecorded-calls.html"><i class="fa-solid fa-play"></i>YuenKi</a></li>
+            <li><a href="prerecorded-calls.html"><i class="fa-solid fa-play"></i>Harshit</a></li>
+            <li><a href="prerecorded-calls.html"><i class="fa-solid fa-play"></i>Joanne</a></li>
+            <li><a href="prerecorded-calls.html"><i class="fa-solid fa-play"></i>Giancarlo</a></li>
+            <li><a href="prerecorded-calls.html"><i class="fa-solid fa-play"></i>Clara</a></li>
+        </ul>
     </div>
   </div>
   <!--     page 4 --- contact -->

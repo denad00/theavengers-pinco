@@ -1,14 +1,50 @@
-@import "partials/reset";
-@import "partials/widgets";
+
+/* INDEX 
+
+1. VARIABLES
+2. RESET
+3. MIXINS
+4. TYPOGRAPHY
+5. SIGNUP
+6. HEADER-FOOTER
+7. NAVIGATION
+8. HOMEPAGE
+9. POSTS-PAGES
+
+*/
+
+/* VARIABLES ========================= */
 @import "partials/variables";
+
+/* RESET ========================= */
 @import "partials/reset";
-@import "partials/print";
-@import "partials/posts-pages";
-@import "partials/navigation";
+
+/* MIXINS ========================= */
 @import "partials/mixins";
+
+/* TYPOGRAPHY ========================= */
+@import "partials/typography";
+
+/* SIGNUP ========================= */
+@import "partials/signup-signin";
+
+/* HEADER-FOOTER ========================= */
+@import "partials/header-footer";
+
+/* NAVIGATION ========================= */
+@import "partials/navigation";
+
+/* NAVIGATION ========================= */
+@import "partials/homepage";
+
+/* POSTS-PAGES ========================= */
+@import "partials/posts-pages";
+
+
+@import "partials/widgets";
+@import "partials/print";
 @import "partials/media";
 @import "partials/layout";
-@import "partials/header-footer";
 @import "partials/forms";
 @import "partials/comments";
 @import "partials/accessibility";
