@@ -1,6 +1,9 @@
 
 console.log(firebaseApp);
 
+  const db = firebaseApp.firestore();
+  const auth = firebaseApp.auth();
+
 // LISTEN FOR AUTH STATUS CHANGES ========
 auth.onAuthStateChanged(user => {
   if (user) {
@@ -14,6 +17,23 @@ auth.onAuthStateChanged(user => {
 // SIGNUP USER ======================
 const signupForm = document.querySelector('#signup-form');
 const signUpBtn = document.querySelector('#signUp');
+
+const login = () => {
+  if (firebaseApp.auth().currentUser) {
+    firebaseApp.auth().signOut();
+  } else {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    auth.signInWithEmailAndPassword(email, password).then((res) => {
+      window.location.replace('index.html');
+      console.log(res);
+    }).catch((error) => {
+      console.log(error.code);
+      console.log(error.message);
+    });    
+  }
+}
 
 signUpBtn.addEventListener('click', () => {
   // get registration information

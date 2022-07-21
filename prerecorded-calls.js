@@ -5,7 +5,7 @@ const nextBtn= document.querySelector('#next');
 const audio = document.querySelector('#audio');
 const progress = document.querySelector('.progress');
 const progressContainer = document.querySelector('.progress-container');
-const callerName = document.querySelector('.caller-name');
+
 
 // Call titles
 const songs = ['Clara', 'Danika', 'Giancarlo', 'Harshit', 'Iris', 'Joanne', "YuenKi"];
@@ -18,6 +18,7 @@ loadSong(songs[callIndex]);
 
 // Update Song details
 function loadSong(songs) {
+    const callerName = document.querySelector('.caller-name');
     callerName.innerText = songs;
     audio.src=`calls/${songs}.mp3`
 }

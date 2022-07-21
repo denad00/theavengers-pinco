@@ -6,8 +6,20 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pin.Co</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;700&family=Work+Sans:wght@400;600;700&display=swap"
+    rel="stylesheet">
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script>
+    const firebaseApp = firebase.initializeApp({
+      apiKey: "AIzaSyBybnwAFnoIbIbxbOQMLEHOaiO796YviRY",
+      projectId: "langara-wmdd4885-avengers"
+    });
+    const db = firebaseApp.firestore();
+    const auth = firebaseApp.auth();
+  </script>
   <script src="checkin.js" defer></script>
   <script src="contact.js" defer></script>
   <script src="sos-button.js" defer></script>
@@ -43,32 +55,40 @@
   <link rel="stylesheet" href="prerecorded-calls-homepage.css">
   <link rel="stylesheet" href="prerecorded-calls.css">
 
-  <title>Homepage</title>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-  <script>
-    const firebaseApp = firebase.initializeApp({
-      apiKey: "AIzaSyBybnwAFnoIbIbxbOQMLEHOaiO796YviRY",
-      projectId: "langara-wmdd4885-avengers"
-    });
-    const db = firebaseApp.firestore();
-    const auth = firebaseApp.auth();
-  </script>
-  <script src="js/scripts.js" defer></script>
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;700&family=Work+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    .container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .map {
+      flex: 1;
+      background: #f0f0f0;
+    }
+
+    .info {
+      padding: 1rem;
+      margin: 0;
+    }
+
+    .info.error {
+      color: #fff;
+      background: #dc3545;
+    }
+  </style>
 </head>
 
 
 <body id="homepage">
   <header class="headerbar">
-      <div class="header-logo">
-        <h1>Pin.Co</h1>
-      </div>
+    <div class="header-logo">
+      <h1>Pin.Co</h1>
+    </div>
 
-      <div id="sosButton">
-        <a href="#page0">SOS</a>
-      </div>
+    <div id="sosButton">
+      <a href="#page0">SOS</a>
+    </div>
 
   </header>
 
@@ -81,11 +101,16 @@
     <a href="#page4">Contact</a>
     <a href="#page5">My Profile</a>
     <a href="#page6">Location</a>
-      <a href="#" id="logout">Logout</a>
+    <a id="logout">Logout</a>
   </div>
   <!--     page 1 --- your location -->
   <div class="page" id="page1">
     <h2 class="nav-title">Your Location</h2>
+    <main class="container">
+      <div id="map" class="map"></div>
+      <!-- For displaying user's coordinate or error message. -->
+      <div id="info" class="info"></div>
+    </main>
   </div>
   <!--     page 2 --- your check-ins -->
   <div class="page" id="page2">
@@ -129,20 +154,20 @@
   <!--     page 3 --- call simulation -->
   <div class="page" id="page3">
     <div class="simulation-title">
-        <h1>Call Simulation</h1>
-        <p>Choose one recording from a list of our voices!</p>
+      <h1>Call Simulation</h1>
+      <p>Choose one recording from a list of our voices!</p>
     </div>
 
     <div class="call-list">
-        <ul>
-            <li><a href="prerecorded-calls.html"><i class="fa-solid fa-play"></i>Danika</a></li>
-            <li><a href="prerecorded-calls.html"><i class="fa-solid fa-play"></i>Iris</a></li>
-            <li><a href="prerecorded-calls.html"><i class="fa-solid fa-play"></i>YuenKi</a></li>
-            <li><a href="prerecorded-calls.html"><i class="fa-solid fa-play"></i>Harshit</a></li>
-            <li><a href="prerecorded-calls.html"><i class="fa-solid fa-play"></i>Joanne</a></li>
-            <li><a href="prerecorded-calls.html"><i class="fa-solid fa-play"></i>Giancarlo</a></li>
-            <li><a href="prerecorded-calls.html"><i class="fa-solid fa-play"></i>Clara</a></li>
-        </ul>
+      <ul>
+        <li><a href="prerecorded-calls.html"><i class="fa-solid fa-play"></i>Danika</a></li>
+        <li><a href="prerecorded-calls.html"><i class="fa-solid fa-play"></i>Iris</a></li>
+        <li><a href="prerecorded-calls.html"><i class="fa-solid fa-play"></i>YuenKi</a></li>
+        <li><a href="prerecorded-calls.html"><i class="fa-solid fa-play"></i>Harshit</a></li>
+        <li><a href="prerecorded-calls.html"><i class="fa-solid fa-play"></i>Joanne</a></li>
+        <li><a href="prerecorded-calls.html"><i class="fa-solid fa-play"></i>Giancarlo</a></li>
+        <li><a href="prerecorded-calls.html"><i class="fa-solid fa-play"></i>Clara</a></li>
+      </ul>
     </div>
   </div>
   <!--     page 4 --- contact -->
@@ -186,6 +211,18 @@
   <footer class="footer">
 
   </footer>
+  <script type="text/javascript">
+    document.getElementById('logout').addEventListener('click', (e) => {
+      firebaseApp.auth().signOut();
+      window.location.replace('signin.html');
+    })
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/9.9.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.9.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.9.0/firebase-auth-compat.js"></script>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFE6wLa6xJlZesSSLEH1TyntvwJyqJXMw&callback=init"></script>
+  <script src="script.js"></script>
 </body>
 
 </html>

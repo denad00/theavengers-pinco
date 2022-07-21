@@ -1,11 +1,4 @@
-const firebaseConfig = {
-    apiKey: "AIzaSyBybnwAFnoIbIbxbOQMLEHOaiO796YviRY",
-    projectId: "langara-wmdd4885-avengers"
-    };
-firebase.initializeApp( firebaseConfig ); // Initialize Firebase w. your project settings
 
-// init database nd check in session collection
-const db = firebase.firestore();
 const checkInSessionCollection = db.collection("checkInSession");
 
 
@@ -34,7 +27,7 @@ const handleSubmit = (event) => {
         fullTime.setMinutes(checkInTime[1]);
         fullTime.setSeconds(0);
         checkInTime = fullTime;
-        createNewCheckInSession("iristest0001", checkInTime);
+        createNewCheckInSession("ictestnotif01", checkInTime);
         console.log(checkInTime);
         document.getElementById("cancelButton").style.display = 'inline';
         document.getElementById("createTimer").style.display = 'none';
