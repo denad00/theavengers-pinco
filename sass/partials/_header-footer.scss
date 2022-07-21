@@ -1,0 +1,14 @@
+.headerbar {
+    background-image: url(/img/desktop-topbar.png);
+    background-size: 100% 100%;
+
+    .header-logo svg {
+        height: 200px;
+        width: 200px;
+    }
+
+    nav ul{
+        display: flex;
+        flex-flow: row nowrap;
+    }
+}

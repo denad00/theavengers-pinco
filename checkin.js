@@ -1,11 +1,4 @@
-const firebaseConfig = {
-    apiKey: "AIzaSyBybnwAFnoIbIbxbOQMLEHOaiO796YviRY",
-    projectId: "langara-wmdd4885-avengers"
-    };
-firebase.initializeApp( firebaseConfig ); // Initialize Firebase w. your project settings
 
-// init database nd check in session collection
-const db = firebase.firestore();
 const checkInSessionCollection = db.collection("checkInSession");
 
 
