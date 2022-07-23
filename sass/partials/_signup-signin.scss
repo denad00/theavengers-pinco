@@ -97,12 +97,14 @@
  }
 
  .signin {
+
+/*
     margin: auto;
     background-color:  $background-color-light;
     border-radius: 40px;
     height: 531px;
     width: 337px;
-    box-shadow: 3px 3px 3px $box-shadow-color;
+    box-shadow: 3px 3px 3px $box-shadow-color; 
 
     svg {
         height: 80px;
@@ -151,6 +153,8 @@
             color: $font-color-dark;
         }
     }
+
+    */
  }
 
  footer {
@@ -218,6 +222,52 @@
  }
 
  .signin{
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100vw;
+    padding: 20px;    
+    min-height: 100vh;
+
+
+    .signin-form {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 1.2rem;
+        background: white;
+        border-radius: 4%;
+        padding: 2.7%;
+        width: 450px;
+
+        svg {
+            width:32%;
+            align-self: center;
+        }
+
+        form {
+            display:flex;
+            flex-flow:column nowrap;
+            gap:1.2rem; 
+        }
+
+        .form-group {
+            display:flex;
+            flex-flow:column nowrap;
+            gap:0.5rem;
+        }
+
+        button{
+            padding:3%;
+        }
+    }
+
+
+
+
+    /*
+     
     height: 666px;
     width: 686px;
     
@@ -250,7 +300,7 @@
             height: 36px;
             width: 400px;
         }
-        }
+        } */
      }
  }
 
