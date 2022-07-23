@@ -1,0 +1,113 @@
+#homepage{
+    background-color: $font-color-light;
+    
+  body{
+      text-align: center;
+  }
+  
+  .page {
+    max-width: 100%;
+    margin: auto;
+  }
+  
+  #sosBtn {
+    display: flex;
+    align-self: center;
+    justify-self: end;
+  }
+  
+  #sosBtn a {
+    text-decoration: none;
+  }
+  
+  #cancelButton {
+      display: none;
+  }
+  
+  #currclock {
+      display: none;
+  }
+  
+  #clockdiv, label, input, button, #timeOutput {
+      color: black;
+      display: inline-block;
+      text-align: center;
+      font-size: 1rem;
+    padding: 1rem;
+  }
+  
+  label {
+    border-radius: 3px;
+  }
+  
+  #clockdiv > div{
+      padding: 1rem;
+      border-radius: 3px;
+      display: inline-block;
+    background: #F0f1f3;
+  }
+  
+  #contactFlow1 {
+    width: 40vw;
+    margin: auto;
+  }
+  
+  #contactFlow2 {
+    width: 40vw;
+    margin: auto;
+  }
+  
+  body {
+    height: 100vh;
+    margin: 0;
+  }
+  
+  h2 {
+    font-size: 2rem;
+  }
+  
+  
+  
+  div.page {
+    display: none;
+    height: calc(100vh - 5.7em);
+  
+  }
+  
+  body div.page:nth-child(odd) {
+    background-color: white;
+  }
+  body div.page:nth-child(even) {
+    background-color: white;
+  }
+  
+  button {
+    background-color: rgb(97,128,251);
+    text-decoration: none;
+    color: white;
+    border:none;
+    border-radius: 5px;
+    padding:.2rem .5rem;
+  }
+  
+  form {
+    display:flex;
+    flex-flow: column nowrap;
+  }
+  .submitArea {
+    padding:1rem;
+  }
+  
+  .contactCard {
+    border-radius: 15px;
+    background-color: rgb(245,245,245);
+    padding: 1rem;
+  }
+  }
+  
+  
+  
+  
+  
+  
+  
