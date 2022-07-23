@@ -37,14 +37,17 @@
 /* NAVIGATION ========================= */
 @import "partials/homepage";
 
-/* POSTS-PAGES ========================= */
-@import "partials/posts-pages";
+/* PAGE-LAYOUT ========================= */
+@import "partials/page-layout";
+
+/* LOCATION ========================= */
+@import "partials/location";
 
 
 @import "partials/widgets";
 @import "partials/print";
 @import "partials/media";
-@import "partials/layout";
+
 @import "partials/forms";
 @import "partials/comments";
 @import "partials/accessibility";

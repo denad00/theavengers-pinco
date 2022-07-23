@@ -3,10 +3,26 @@
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-position: center;
-    // background-color: rgb(255, 212, 133);
  }
 
- header {
+ #signin-page header {
+    display: flex;
+    gap: .75rem;
+    padding: 1rem 4%;
+
+    svg {
+        max-width: 10%;
+    }
+
+    h1 {
+        display: flex;
+        align-items: center;
+        font-size: 1.5rem;
+        color: $font-color-light;
+    }
+ }
+
+ #signup-page header {
     display: flex;
     gap: .75rem;
     padding: 1rem 4%;
