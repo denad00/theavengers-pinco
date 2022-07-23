@@ -25,7 +25,9 @@
     });
   };
 
-  const login = () => {
+  const login = (e) => {
+    e.preventDefault();
+    alert("Harshit")
     if (firebaseApp.auth().currentUser) {
       firebaseApp.auth().signOut();
     } else {
@@ -67,9 +69,11 @@
       else{
 
       }
+
+      const signInForm = document.getElementById('signin-form')
       
-      if(document.getElementById('signin')) {
-        document.getElementById('signin').addEventListener('click', login, false);
+      if(signInForm) {
+        signInForm.addEventListener('submit', login);
       }
 
       if(document.getElementById('signup')) {
