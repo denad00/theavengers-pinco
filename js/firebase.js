@@ -1,3 +1,13 @@
+'use strict';
+
+
+class FirbeaseRepository {
+  constructor()
+}
+
+
+
+
 (function () {
 
   const firebaseApp = firebase.initializeApp({ 
