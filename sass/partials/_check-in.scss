@@ -1,0 +1,57 @@
+#page2 {
+    padding: 1rem 5%;
+
+    .caption {
+        color: $font-color-grey;
+
+        span {
+            font-weight: bold;
+            border-bottom: 1px solid $font-color-grey;
+        }
+    }
+
+    #cancelButton {
+        display: none;
+    }
+    
+    #currclock {
+        display: none;
+    }
+    
+    #clockdiv, label, input, button, #timeOutput {
+        color: black;
+        display: inline-block;
+        text-align: center;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .alarm-div{
+        padding: 1.5rem 4%;
+        border-radius: 15px;
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 1rem;
+        background: #F0f1f3;
+        margin-top: 1.5rem;
+        margin-left: 1rem;
+        text-align: center;
+        width: 90%;
+
+        button {
+            color: $font-color-light;
+        }
+    }
+}
+
+@media screen and (min-width: 800px) {
+    #page2 {
+       padding-top: 10rem;
+       padding-left: 30rem;
+
+       .alarm-div {
+        margin: 1rem 0;
+       }
+
+    }
+}

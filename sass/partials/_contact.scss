@@ -1,3 +1,36 @@
 #page4 {
-    padding: 1rem 4%;
+    
+    h2{
+        padding: 1rem 5%;
+    }
+
+
+    .contactFlow {
+        p {
+            font-size: 1rem;
+            color: $font-color-grey;
+            padding-bottom: 1rem;
+            padding: 1rem 5%;
+        }
+
+        #createBtn {
+            display: block;
+            text-align: center;
+            padding: .5rem 3rem;
+            width: 90%;
+            font-size: 1.2rem;
+            margin: auto;
+        }
+
+        h3 {
+            margin-top: 1.5rem;
+            text-align: center;
+            background-color: rgb(213, 213, 213);
+            padding: .5rem;
+        }
+        #emergencyContactsOutput {
+            display: flex;
+            flex-flow: column nowrap;
+        }
+    }
 }
