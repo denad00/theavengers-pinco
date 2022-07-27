@@ -33,9 +33,8 @@
       const password = document.getElementById('signin-password').value;
 
       auth.signInWithEmailAndPassword(email, password).then((res) => {
-        console.log(firebaseApp.auth().currentUser)
         localStorage.setItem('user',res.user)
-        //window.location.replace('index.html');
+        window.location.replace('index.html');
       }).catch((error) => {
         console.log(error.code);
         console.log(error.message);
@@ -45,9 +44,8 @@
 
   const initializeApp = () => {
     firebaseApp.auth().onAuthStateChanged(function(user) {
-      console.log(user)
       if (user) {
-        //window.location.replace('index.html');
+        window.location.replace('index.html');
       }
       else{
 
