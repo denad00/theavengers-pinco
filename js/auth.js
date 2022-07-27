@@ -26,26 +26,30 @@
   };
 
   const login = () => {
-    if (firebaseApp.auth().currentUser) {
-      firebaseApp.auth().signOut();
+    if (auth.currentUser) {
+      auth.signOut();
     } else {
       const email = document.getElementById('signin-email').value;
       const password = document.getElementById('signin-password').value;
-
+      const errorBox = document.getElementById("error")
       auth.signInWithEmailAndPassword(email, password).then((res) => {
-        localStorage.setItem('user',res.user)
+        if(errorBox)
+        error.style.display = "none";
+        localStorage.setItem('user',JSON.stringify(res.user));
         window.location.replace('index.html');
       }).catch((error) => {
-        console.log(error.code);
-        console.log(error.message);
+
+        errorBox.style.display = "block";
+        errorBox.innerText = 'Invalid Email/Password';
+        errorBox.style.padding = '1.5%';
       });    
     }
   }
 
   const initializeApp = () => {
-    firebaseApp.auth().onAuthStateChanged(function(user) {
+    auth.onAuthStateChanged(function(user) {
       if (user) {
-        window.location.replace('index.html');
+         window.location.replace('index.html');
       }
       else{
 

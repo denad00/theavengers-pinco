@@ -1,8 +1,8 @@
+'use strict';
+
 
 
 const liveLocationCollection = db.collection("liveLocationSharing");
-
-console.log(JSON.stringify(localStorage.getItem('user')))
 
 const createMap = ({ lat, lng }) => {
   return new google.maps.Map(document.getElementById('map'), {
@@ -53,6 +53,7 @@ function init() {
   const initialPosition = { lat: 59.325, lng: 18.069 };
   const map = createMap(initialPosition);
   const marker = createMarker({ map, position: initialPosition });
+
 
   trackLocation({
     onSuccess: ({ coords: { latitude: lat, longitude: lng } }) => {

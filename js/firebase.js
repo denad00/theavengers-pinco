@@ -16,6 +16,7 @@ export const firebaseApp =  () => {
 export const db = firebaseApp().firestore();
 export const auth = firebaseApp().auth();
 
+export const userData = () => auth.currentUser
 
 
 

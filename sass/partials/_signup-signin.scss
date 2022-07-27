@@ -111,9 +111,9 @@
         flex-flow: column nowrap;
         gap: 1.2rem;
         background-color:  $background-color-light;
-        border-radius: 4%;
-        padding: 2.7%;
-        width: 450px;
+        border-radius: 6%;
+        padding: 4% 5% 5% 4%;
+        width: 550px;
         box-shadow: 3px 3px 3px $box-shadow-color; 
 
         svg {
@@ -133,8 +133,21 @@
             gap:0.5rem;
         }
 
-        .signin {
-            padding:3%;
+        #signin {
+            padding:2.5%;
+            background-color: #6380FF;
+            border-color: #3E62FF;
+            color:#fff;
+            margin-top: 1.5%;
+        }
+
+        #signup-link {
+            color: #000;
+        }
+
+        #error {
+            color: #f7f7f7;
+            background: #333;
         }
     }
 
@@ -201,8 +214,7 @@
  } */
 
  footer {
-    margin: 2rem 15%;
-    padding-top: 4rem;
+    margin: 1.5rem;
 
     ul {
         padding-inline-start: 0;
