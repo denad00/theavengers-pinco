@@ -97,6 +97,53 @@
  }
 
  .signin {
+    display: flex;
+    align-items: center;
+    flex-flow: column nowrap;
+    justify-content: center;
+    width: 100vw;
+    padding: 20px;    
+    min-height: 100vh;
+
+
+    .signin-form {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 1.2rem;
+        background-color:  $background-color-light;
+        border-radius: 4%;
+        padding: 2.7%;
+        width: 450px;
+        box-shadow: 3px 3px 3px $box-shadow-color; 
+
+        svg {
+            width:32%;
+            align-self: center;
+        }
+
+        form {
+            display:flex;
+            flex-flow:column nowrap;
+            gap:1.2rem; 
+        }
+
+        .form-group {
+            display:flex;
+            flex-flow:column nowrap;
+            gap:0.5rem;
+        }
+
+        .signin {
+            padding:3%;
+        }
+    }
+
+
+ }
+
+ /*
+
+ .signin {
     margin: auto;
     background-color:  $background-color-light;
     border-radius: 40px;
@@ -151,7 +198,7 @@
             color: $font-color-dark;
         }
     }
- }
+ } */
 
  footer {
     margin: 2rem 15%;
@@ -217,80 +264,5 @@
     }
  }
 
- .signin{
-    display: flex;
-    align-items: center;
-    flex-flow: column nowrap;
-    justify-content: center;
-    width: 100vw;
-    padding: 20px;    
-    min-height: 100vh;
-
-    .signin-form {
-        display: flex;
-        flex-flow: column nowrap;
-        gap: 1.2rem;
-        background: white;
-        border-radius: 4%;
-        padding: 2.7%;
-        width: 450px;
-
-        svg {
-            width:32%;
-            align-self: center;
-        }
-
-        form {
-            display:flex;
-            flex-flow:column nowrap;
-            gap:1.2rem; 
-        }
-
-        .form-group {
-            display:flex;
-            flex-flow:column nowrap;
-            gap:0.5rem;
-        }
-
-        button{
-            padding:3%;
-        }
-    }
-
-     
-    height: 666px;
-    width: 686px;
-    
-    svg {
-        height: 160px;
-        width: 160px;
-        display: flex;
-        padding-top: 1rem;
-        margin: auto;
-    }
-    
-    form {
-        gap: 1rem;
-
-        h3 {
-            font-size: 2rem;
-        }
-    
-        label {
-            margin: auto;
-    
-            input {
-            height: 36px;
-            width: 400px
-            }
-        }
-    
-        button {
-            margin: auto;
-            height: 36px;
-            width: 400px;
-        }
-        } 
-     }
  }
 

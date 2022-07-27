@@ -22,7 +22,6 @@ function navigationFlow(event){
 
 // get boolean data of "emergency contact"
 const cb = document.querySelector('#emergencyAccept');
-// console.log(cb.checked);
 
 // define submit function
 contactSubmit.addEventListener ("click", function(event) {
@@ -34,7 +33,6 @@ contactSubmit.addEventListener ("click", function(event) {
     userID: "ictestnotif01",  // get userID after log in, this is just a text id
     contactID: Math.floor(Math.random() * Math.floor(Math.random() * Date.now()))  //generate contact id
   }
-  console.log(contact);
     //get user id by firebase doc and add contact into firebase collection-contact by calling function getUserContactsList
   const outcome = contactCollection.add(contact)
 .then((docRef) => {

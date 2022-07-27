@@ -1,4 +1,4 @@
-(function () {
+(function() {
   const firebaseApp = firebase.initializeApp({ 
     apiKey: "AIzaSyBybnwAFnoIbIbxbOQMLEHOaiO796YviRY",
     authDomain: "langara-wmdd4885-avengers.firebaseapp.com",
@@ -25,9 +25,7 @@
     });
   };
 
-  const login = (e) => {
-    e.preventDefault();
-    alert("Harshit")
+  const login = () => {
     if (firebaseApp.auth().currentUser) {
       firebaseApp.auth().signOut();
     } else {
@@ -35,8 +33,9 @@
       const password = document.getElementById('signin-password').value;
 
       auth.signInWithEmailAndPassword(email, password).then((res) => {
-        window.location.replace('index.html');
-        console.log(res);
+        console.log(firebaseApp.auth().currentUser)
+        localStorage.setItem('user',res.user)
+        //window.location.replace('index.html');
       }).catch((error) => {
         console.log(error.code);
         console.log(error.message);
@@ -44,47 +43,32 @@
     }
   }
 
-  const saveUser = () => {
-
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-
-    db.collection('user').add({
-      email: email,
-      password: password
-    })
-    .then((docRef) => {
-      console.log("Document ID", docRef.id)
-    }).catch((error) => {
-      console.error("Error",error);
-    })
-   
-  };
-
   const initializeApp = () => {
     firebaseApp.auth().onAuthStateChanged(function(user) {
+      console.log(user)
       if (user) {
-        window.location.replace('index.html');
+        //window.location.replace('index.html');
       }
       else{
 
       }
+    })
 
-      const signInForm = document.getElementById('signin-form')
-      
-      if(signInForm) {
-        signInForm.addEventListener('submit', login);
-      }
+    const signInFormButton = document.getElementById('signin');
 
-      if(document.getElementById('signup')) {
-        document.getElementById('signup').addEventListener('click', register, false);
-      }
-    
-  })};
+    if(signInFormButton) {
+      signInFormButton.addEventListener('click', login);
+    }
+
+    if(document.getElementById('signup')) {
+      document.getElementById('signup').addEventListener('click', register, false);
+    }
+
+};
 
   window.onload = function() {
     initializeApp();
   };
 
-  
-})();
+})()
+
