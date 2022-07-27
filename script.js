@@ -2,6 +2,7 @@
 
 const liveLocationCollection = db.collection("liveLocationSharing");
 
+console.log(JSON.stringify(localStorage.getItem('user')))
 
 const createMap = ({ lat, lng }) => {
   return new google.maps.Map(document.getElementById('map'), {

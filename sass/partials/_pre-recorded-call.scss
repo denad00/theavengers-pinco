@@ -1,0 +1,31 @@
+#prerecorded-calls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../../img/pin.co_background_graident-04.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+
+    main {
+        background-color: rgba(0, 0, 0, 0.733);
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: center;
+
+        h1 {
+            font-size: 3rem;
+            color: $font-color-light;
+        }
+
+        .navigation {
+            #close {
+                
+            }
+        }
+    }
+
+}

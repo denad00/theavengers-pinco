@@ -16,7 +16,6 @@ let currSessionRef = null;
 const handleSubmit = (event) => {
     // Prevent default action of reloading the page
     event.preventDefault();
-    console.log('handleSubmit');
     const setTime = document.getElementById('timeinput');
     checkInTime = setTime.value.split(":");
     if (checkInTime.length < 2) {
@@ -28,7 +27,6 @@ const handleSubmit = (event) => {
         fullTime.setSeconds(0);
         checkInTime = fullTime;
         createNewCheckInSession("ictestnotif01", checkInTime);
-        console.log(checkInTime);
         document.getElementById("cancelButton").style.display = 'inline';
         document.getElementById("createTimer").style.display = 'none';
         document.getElementById("checkInAlarmStatus").innerText = 'Check-in alarm: on';
@@ -54,7 +52,6 @@ function createNewCheckInSession (userId, checkInTime) {
     //put checkin session object into firestore
     const outcome = checkInSessionCollection.add(session)
     .then((docRef) => {   //docRef: firestore method to get the doc location
-        console.log("Document written with ID: ", docRef.id);
         currSessionRef = docRef; //remember the firestore reference of current session
         // do something else: getUserContactsList("iristest0001", updateContactsListHTML);
     })
@@ -66,11 +63,9 @@ function createNewCheckInSession (userId, checkInTime) {
 function updateCheckInSession (docRef, sessionObj) {
     docRef.update(sessionObj)
     .then(() => {
-        console.log("checkInSession successfully updated!");
     })
     .catch((error) => {
         // The document probably doesn't exist.
-        console.error("Error updating document: ", error);
     });
 }
 
@@ -81,7 +76,6 @@ checkinForm.addEventListener("submit", handleSubmit);
 const handleCancel = (event) => {
     event.preventDefault();
     checkInTime = null;
-    console.log('handleCancel');
     updateCheckInSession(currSessionRef, { active: false });
     currSessionRef = null;
     document.getElementById("cancelButton").style.display = 'none';

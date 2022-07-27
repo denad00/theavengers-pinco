@@ -20,43 +20,6 @@
     text-decoration: none;
   }
   
-  #cancelButton {
-      display: none;
-  }
-  
-  #currclock {
-      display: none;
-  }
-  
-  #clockdiv, label, input, button, #timeOutput {
-      color: black;
-      display: inline-block;
-      text-align: center;
-      font-size: 1rem;
-    padding: 1rem;
-  }
-  
-  label {
-    border-radius: 3px;
-  }
-  
-  #clockdiv > div{
-      padding: 1rem;
-      border-radius: 3px;
-      display: inline-block;
-    background: #F0f1f3;
-  }
-  
-  #contactFlow1 {
-    width: 40vw;
-    margin: auto;
-  }
-  
-  #contactFlow2 {
-    width: 40vw;
-    margin: auto;
-  }
-  
   body {
     height: 100vh;
     margin: 0;

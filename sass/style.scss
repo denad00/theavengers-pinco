@@ -19,8 +19,9 @@
 /* RESET ========================= */
 @import "partials/reset";
 
-/* MIXINS ========================= */
-@import "partials/mixins";
+/* MEDIA ========================= */
+@import "partials/media";
+
 
 /* TYPOGRAPHY ========================= */
 @import "partials/typography";
@@ -40,14 +41,17 @@
 /* PAGE-LAYOUT ========================= */
 @import "partials/page-layout";
 
-/* LOCATION ========================= */
-@import "partials/location";
+/* CONTACT ========================= */
+@import "partials/contact";
+
+/* CHECK-IN ========================= */
+@import "partials/check-in";
+
+/* CALL SIMULATIOn ========================= */
+@import "partials/pre-recorded-call-homepage";
+@import "partials/pre-recorded-call";
 
 
-@import "partials/widgets";
 @import "partials/print";
-@import "partials/media";
-
 @import "partials/forms";
-@import "partials/comments";
 @import "partials/accessibility";
