@@ -12,6 +12,9 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://static.vancdn.com/public/js/jquery/jquery-1.12.4.min.js?v=27"></script>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css' integrity='sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==' crossorigin='anonymous' referrerpolicy='no-referrer' />
+
   <script>
     const firebaseApp = firebase.initializeApp({
       apiKey: "AIzaSyBybnwAFnoIbIbxbOQMLEHOaiO796YviRY",
@@ -336,6 +339,7 @@
   </div>
   <!--     page 4 --- contact -->
   <div class="page" id="page4">
+    
     <div class="contact-header">
       <h2>Contact</h2>
     </div>
@@ -346,13 +350,115 @@
       <button id="createBtn">Create</button>
       <h3>Emergency contacts</h3>
       <div id="emergencyContactsOutput"></div>
+      <div class="sendsmsContainer"><a href="#page4" class="info_call_sms" id="sendsms" data-phone="+1 (778) 320-0003" data-body="Hey! I have set you as my emergency contact! Please open this link in your browser and allow permission of push notifications so that you can receive my sos msg when there is an emergency https://pincocontactobserverpage.irischen11.repl.co/?userId=ictestnotif01 "><span class="flex flex_valign_center flex_halign_center">Click here to fulfill setting up emergency contacts</span></a></div>
       <h3>Other saved Contacts</h3>
       <div id="otherContactsOutput"></div>
     </div>
 
+    
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+    <script>
+      //发送短信
+      os = "";
+$(document).on('click', '#sendsms', function () {
+    var phone = $(this).attr('data-phone');
+    var body = $(this).attr('data-body');
+    sendSMS(phone, body, os);
+});
+
+function sendSMS(phone = '', body = '', os = '') {
+    if (phone.length <= 0) {
+        return '';
+    }
+    var sign = isIOS() ? '&' : '?';
+    var smsURL = 'sms:' + phone + sign + 'body=' + decodeURI(body.replace(/\&/g, ' '));
+    if (os == 'android') {
+        android.sendMsg(phone, body);
+    }
+    else if (os == 'ios') {
+        var sendSMSObj = {phone: phone, body: body};
+        window.webkit.messageHandlers.sendMsg.postMessage(sendSMSObj);
+    }
+    else {
+        console.log("[sendSMS] goto");
+        goto(smsURL);
+    }
+}
+
+    /* 判断android与ios*/
+function isIOS() {
+    var u = navigator.userAgent, app = navigator.appVersion;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+    return isiOS;
+}
+/**
+ * 跳转页面方法
+ * @param url 跳转到指定的url
+ * @param closeCurrentPage 跳转之前是否需要关闭当前页面，0否，1是,2关闭当前页面和上一个页面，针对app上使用,_blank为新窗口打开
+ * @param isFullUrl 是否是全网址,前面带域名的 1是，0否，针对app上使用
+ */
+ function goto(url='',closeCurrentPage=0,isFullUrl=0){
+    if(typeof(FROM)!="undefined" && FROM=='app'){//app访问
+        if(url==-1 || url=='' || url=='close'){//返回上一页
+            if(OS=="android"){
+                if(closeCurrentPage==2){//关闭当前页面和上一个页面
+                    android.toback(2);
+                }else{
+                    android.toback();
+                }
+            }else if(OS=="ios"){
+                var tobackObj={toback:1};
+                if(closeCurrentPage==2){//关闭当前页面和上一个页面
+                    tobackObj={toback:2};
+                }
+                window.webkit.messageHandlers.toback.postMessage(tobackObj);
+            }
+        }else{//跳转到指定页面
+            if (url.charAt(0) == "/"){url = url.substr(1);}//去除前面斜杠
+            if(OS=="android"){
+                if(closeCurrentPage==1){//先返回再跳转
+                    android.skipurl_finish(url,isFullUrl);
+                }else{
+                    android.skipurl(url,isFullUrl);
+                }
+            }else if(OS=="ios"){
+                if(closeCurrentPage==1){//先返回再跳转
+                    var skipurl_finishObj={url:url,isFull:isFullUrl};
+                    window.webkit.messageHandlers.skipurl_finish.postMessage(skipurl_finishObj);
+                }else{
+                    var skipurlObj={skipurl:url,isFull:isFullUrl};
+                    window.webkit.messageHandlers.skipurl.postMessage(skipurlObj);
+                }
+            }
+        }
+    }else{//h5访问
+        var target = closeCurrentPage || '_self';
+        if (['_self', '_blank'].indexOf(target) <= -1) {
+            target = '_self';
+        }
+        if(url=='close'){//返回关闭当前页并返回上一步
+            try{
+                window.WeixinJSBridge.call('closeWindow');
+            }catch (e) {
+                window.history.back();
+            }
+        }else if(url==-1 || url=='' || url==null){
+            history.go(-1);
+        }else{
+            /*var nextPage = document.createElement('a');
+            nextPage.setAttribute('href', url);
+            nextPage.setAttribute('target', target);
+            nextPage.click();*/
+            window.open(url, target);
+        }
+    }
+}
+</script>
+
     <div class="contactFlow" id="contactFlow1">
       <p>When you activate emergency SOS button, it sends a message with your current location to your emergency
-        contacts via SMS. </p>
+        contacts. </p>
       <div class="contactCard">
         <h3>Contact</h3>
         <form action="#" method="get">

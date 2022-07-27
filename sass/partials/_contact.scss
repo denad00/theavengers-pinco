@@ -22,6 +22,12 @@
             margin: auto;
         }
 
+        #createBtn:hover,
+        button:hover {
+            background-color:$color-hover;
+            color: $font-color-dark;
+        }
+
         h3 {
             margin-top: 1.5rem;
             text-align: center;
@@ -32,5 +38,32 @@
             display: flex;
             flex-flow: column nowrap;
         }
+
+        li {
+            list-style-type: none;
+            border-bottom: 1px $font-color-grey solid;
+            margin: .5rem 2rem;
+            text-align: center;
+        }
+
+        #sendsms {
+            margin: .5rem 2rem;
+            background-color: $color-main-dark;
+            color: $font-color-light;
+            border-radius: 10px;
+            padding: 0.3rem 0.5rem;
+            text-decoration: none;
+        }
+
+        #sendsms:hover {
+            color: $font-color-dark;
+            background-color:$color-hover;
+        }
+
+        .sendsmsContainer {
+            display: flex;
+            justify-content: center;
+        }
+
     }
 }
