@@ -39,62 +39,60 @@
     }
  }
 
-.signup {
-    margin: auto;
-    background-color:  $background-color-light;
-    border-radius: 40px;
-    height: 641px;
-    width: 337px;
-    box-shadow: 3px 3px 3px $box-shadow-color;
+ .signup {
+    display: flex;
+    align-items: center;
+    flex-flow: column nowrap;
+    justify-content: center;
+    width: 100vw;
+    padding: 20px;    
+    min-height: 100vh;
 
-    svg {
-        height: 80px;
-        width: 80px;
-        display: flex;
-        padding-top: 1rem;
-        margin: auto;
-    }
 
-    form {
+    .signup-form {
         display: flex;
         flex-flow: column nowrap;
-        gap: .5rem;
-        margin: 0 15%;
+        gap: 1.2rem;
+        background-color:  $background-color-light;
+        border-radius: 6%;
+        padding: 4% 5% 5% 4%;
+        width: 100%;
+        box-shadow: 3px 3px 3px $box-shadow-color; 
 
-        h3 {
-            text-align: center;
+        svg {
+            width:32%;
+            align-self: center;
         }
 
-        label {
-            display: flex;
-            flex-flow: column nowrap;
+        form {
+            display:flex;
+            flex-flow:column nowrap;
+            gap:1.2rem; 
         }
 
-        input {
-            height: 36px;
-            width: 248px;
+        .form-group {
+            display:flex;
+            flex-flow:column nowrap;
+            gap:0.5rem;
         }
 
-        button {
+        #signUp {
+            padding:2.5%;
             background-color: $color-main-dark;
             color: $font-color-light;
-            box-shadow: none;
-            border: none;
-            height: 40px;
-            width: 248px;
+            border-color: #3E62FF;
+            margin-top: 1.5%;
         }
-    }
 
-    p {
-        text-align: center;
-        margin: 1rem 15%;
-        font-size: .75rem;
-
-        a {
+        #signin-link {
             color: $font-color-dark;
         }
+
     }
+
  }
+
+
 
  .signin {
     display: flex;
@@ -113,7 +111,7 @@
         background-color:  $background-color-light;
         border-radius: 6%;
         padding: 4% 5% 5% 4%;
-        width: 550px;
+        width: 100%;
         box-shadow: 3px 3px 3px $box-shadow-color; 
 
         svg {
@@ -135,83 +133,25 @@
 
         #signin {
             padding:2.5%;
-            background-color: #6380FF;
+            background-color: $color-main-dark;
+            color: $font-color-light;
             border-color: #3E62FF;
-            color:#fff;
             margin-top: 1.5%;
         }
 
         #signup-link {
-            color: #000;
+            color: $font-color-dark;
         }
 
-        #error {
-            color: #f7f7f7;
-            background: #333;
-        }
     }
-
 
  }
 
- /*
+#error, #errorPassword {
+    color: #f7f7f7;
+    background: #333;
+}
 
- .signin {
-    margin: auto;
-    background-color:  $background-color-light;
-    border-radius: 40px;
-    height: 531px;
-    width: 337px;
-    box-shadow: 3px 3px 3px $box-shadow-color; 
-
-    svg {
-        height: 80px;
-        width: 80px;
-        display: flex;
-        padding-top: 1rem;
-        margin: auto;
-    }
-
-    form {
-        display: flex;
-        flex-flow: column nowrap;
-        gap: 1rem;
-        margin: 0 15%;
-
-        h3 {
-            text-align: center;
-        }
-
-        label {
-            display: flex;
-            flex-flow: column nowrap;
-        }
-
-        input {
-            height: 36px;
-            width: 248px;
-        }
-
-        button {
-            background-color: $color-main-dark;
-            color: $font-color-light;
-            box-shadow: none;
-            border: none;
-            height: 40px;
-            width: 248px;
-        }
-    }
-
-    p {
-        text-align: center;
-        margin: 1rem 15%;
-        font-size: .75rem;
-
-        a {
-            color: $font-color-dark;
-        }
-    }
- } */
 
  footer {
     margin: 1.5rem;
@@ -241,6 +181,8 @@
  }
 
  @media screen and (min-width: 800px){
+
+    /*
 .signup{
     height: 782px;
     width: 800px;
@@ -274,7 +216,20 @@
             width: 400px;
         }
     }
+ }  */
+
  }
 
+ @media screen and (min-width: 600px){
+    .signin {
+        .signin-form {
+            width: 550px;
+        }
+    }
+    .signup {
+        .signup-form {
+            width: 600px;
+        }
+    }
  }
 
