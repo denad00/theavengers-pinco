@@ -13,13 +13,13 @@
   const db = firebaseApp.firestore();
   const auth = firebaseApp.auth();
 
-  
   const register =  (e) => {
     e.preventDefault();
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirmPassword').value
     const error = document.getElementById('errorMessage');
+    const errorBox = document.getElementById("error")
   
     if (password !== confirmPassword) {
       error.innerHTML = "Passwords do not match, please try again";
@@ -32,39 +32,29 @@
     } else {
 
       auth.createUserWithEmailAndPassword(email, password).then(res => {
+        errorBox.style.display = "none";
         let user = auth.currentUser;
         if(user != null) {
           uid = user.uid;
         }
+
         const userName = document.getElementById('fullName').value
         const userPhone = document.getElementById('phone').value;
-        const saveUser = {
-          name: userName,
-          phone: userPhone,
-          email: email,
-          password: password,
-          userID: uid,
-          emergencyContactID: "",
-        }
 
-        const userStatus = {
-          email: email,
-          userID: uid,
-          time: new Date(),
-          longitutde: "",
-          latitude: "",
-          sosEvent: false,
-          tokenID: "",
-        } 
-
-        db.collection("user").add(saveUser)
-        db.collection("userStatus").add(userStatus)
-        swal('Your Account Created','Your account was created successfully, you can log in now.',
-        ).then((value) => {
+        auth.currentUser.updateProfile({
+          displayName: userName,
+          photoURL: '',
+        }).then(() => {
+          db.collection("user").add({uid: uid, phoneNumber: userPhone, sosEvent: false, email: email}).then(() =>{
             setTimeout(function(){
-                window.location.replace("../index.html");
-            }, 1000)
-        });
+              window.location.replace("../index.html");
+          }, 1000)
+          })
+        })
+      }).catch(error => {
+        errorBox.style.display = "block";
+        errorBox.innerText =  'Account already exists';
+        errorBox.style.padding = '1.5%';
       });
     };
   }
