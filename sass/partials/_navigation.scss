@@ -20,7 +20,7 @@
         position: absolute;
         display: flex;
         flex-direction: column;
-        width: 400px;
+        width: 310px;
         height: 752px;
         z-index: 1;
         top: 58px;
@@ -46,7 +46,7 @@
         display: flex;
         flex-flow: column nowrap;
         justify-content: space-between;
-        padding: 3rem 10%;
+        padding: 3rem 2%;
 
         .menu-top {
             display: flex;
@@ -113,7 +113,7 @@
     #homepage{
 
         .nav-bar {
-            padding: 3rem 5%;
+            padding: 3rem 2%;
         }
 
     }

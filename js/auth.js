@@ -1,4 +1,4 @@
-(function () {
+(function() {
   const firebaseApp = firebase.initializeApp({ 
     apiKey: "AIzaSyBybnwAFnoIbIbxbOQMLEHOaiO796YviRY",
     authDomain: "langara-wmdd4885-avengers.firebaseapp.com",
@@ -13,78 +13,120 @@
   const db = firebaseApp.firestore();
   const auth = firebaseApp.auth();
 
-  
-  const register = () => {
+  const register =  (e) => {
+    e.preventDefault();
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value
+    const error = document.getElementById('errorMessage');
+    const errorBox = document.getElementById("error")
+  
+    if (password !== confirmPassword) {
+      error.innerHTML = "Passwords do not match, please try again";
+      signupForm.reset();
+    
+    } else if (password.length < 6) {
+      error.innerHTML = "Passwords must be at least six characters"
+      signupForm.reset();
+    
+    } else {
 
-    auth.createUserWithEmailAndPassword(email, password).then((res) => {
-      console.log(res);
-    }).catch((error) => {
-      console.log(error.message);
-    });
-  };
+      auth.createUserWithEmailAndPassword(email, password).then(res => {
+        errorBox.style.display = "none";
+        let user = auth.currentUser;
+        if(user != null) {
+          uid = user.uid;
+        }
+
+        const userName = document.getElementById('fullName').value
+        const userPhone = document.getElementById('phone').value;
+
+        auth.currentUser.updateProfile({
+          displayName: userName,
+          photoURL: '',
+        }).then(() => {
+          db.collection("user").add({uid: uid, phoneNumber: userPhone, sosEvent: false, email: email}).then(() =>{
+            setTimeout(function(){
+              window.location.replace("../index.html");
+          }, 1000)
+          })
+        })
+      }).catch(error => {
+        errorBox.style.display = "block";
+        errorBox.innerText =  'Account already exists';
+        errorBox.style.padding = '1.5%';
+      });
+    };
+  }
 
   const login = (e) => {
     e.preventDefault();
-    alert("Harshit")
-    if (firebaseApp.auth().currentUser) {
-      firebaseApp.auth().signOut();
+    if (auth.currentUser) {
+      auth.signOut();
     } else {
       const email = document.getElementById('signin-email').value;
       const password = document.getElementById('signin-password').value;
-
+      const errorBox = document.getElementById("error")
       auth.signInWithEmailAndPassword(email, password).then((res) => {
+        if(errorBox)
+        error.style.display = "none";
+        localStorage.setItem('user',JSON.stringify(res.user));
         window.location.replace('index.html');
-        console.log(res);
       }).catch((error) => {
-        console.log(error.code);
-        console.log(error.message);
+
+        errorBox.style.display = "block";
+        errorBox.innerText = 'Invalid Email/Password';
+        errorBox.style.padding = '1.5%';
       });    
     }
   }
 
-  const saveUser = () => {
+  const validatePassword = (e) => {
+    let confirmPassword = e.target.value
+    let password = document.getElementById('password').value
+    const errorPasswordBox = document.getElementById("errorPassword")
+    const signUpButton = document.getElementById('signUp')
 
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-
-    db.collection('user').add({
-      email: email,
-      password: password
-    })
-    .then((docRef) => {
-      console.log("Document ID", docRef.id)
-    }).catch((error) => {
-      console.error("Error",error);
-    })
-   
-  };
+    if(confirmPassword != password) {
+      errorPasswordBox.style.display = "block";
+      errorPasswordBox.innerText = 'Password do not match';
+      errorPasswordBox.style.padding = '1.5%';
+      signUpButton.disabled = true;
+    }
+    else {
+      errorPasswordBox.style.display = "none";
+      signUpButton.disabled = false;
+    }
+  }
 
   const initializeApp = () => {
-    firebaseApp.auth().onAuthStateChanged(function(user) {
+    auth.onAuthStateChanged(function(user) {
       if (user) {
-        window.location.replace('index.html');
+         window.location.replace('index.html');
       }
-      else{
+    })
 
-      }
+    const signInForm = document.getElementById('signin-form');
+    const signUpForm = document.getElementById('signup-form');
+    const confirmPassword = document.getElementById('confirmPassword');
 
-      const signInForm = document.getElementById('signin-form')
-      
-      if(signInForm) {
-        signInForm.addEventListener('submit', login);
-      }
+    if(signInForm) {
+      signInForm.addEventListener('submit', login, false);
+    }
 
-      if(document.getElementById('signup')) {
-        document.getElementById('signup').addEventListener('click', register, false);
-      }
-    
-  })};
+    if(signUpForm) {
+      signUpForm.addEventListener('submit', register, false);
+    }
+
+    if(confirmPassword) {
+      confirmPassword.addEventListener('keyup', validatePassword, false)
+    }
+
+};
 
   window.onload = function() {
     initializeApp();
   };
 
-  
-})();
+})()
+

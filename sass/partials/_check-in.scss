@@ -1,5 +1,4 @@
 #page2 {
-    padding: 1rem 5%;
 
     .caption {
         color: $font-color-grey;
@@ -46,8 +45,9 @@
 
 @media screen and (min-width: 800px) {
     #page2 {
-       padding-top: 10rem;
-       padding-left: 30rem;
+        padding-top: 3rem;
+        width: 800px;
+        margin: auto;
 
        .alarm-div {
         margin: 1rem 0;

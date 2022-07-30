@@ -5,16 +5,14 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Page</title>
+  <title>Login-PinCo</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;700&family=Work+Sans:wght@400;600;700&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-
+  <link rel="stylesheet" href="sass/css/style.css">
 </head>
 
 <body id="signin-page">
-
   <main>
     <div class="signin">
       <div class="signin-form">
@@ -86,8 +84,8 @@
             </g>
           </g>
         </svg>
-        <form action="#" method="post" id="signin-form">
-          <h3>Sign in in seconds</h3>
+        <form method="post" id="signin-form">
+          <div id="error" style="display:none"></div>
           <div class="form-group">
             <label for="signin-email">Email:</label>
             <input type="email" id="signin-email" placeholder="Enter your email address" required>
@@ -95,13 +93,13 @@
 
           <div class="form-group">
             <label for="signin-password">Password:</label>
-            <input type="password" id="signin-password" placeholder="**********" required>
+            <input type="password" minlength="8" id="signin-password" placeholder="**********" required>
           </div>
 
           <button type="submit" id="signin">Sign In</button>
           </label>
         </form>
-        <p>Dont have an account? <a href="signup.html">Sign up here</a></p>
+        <p>Dont have an account? <a id="signup-link" href="signup.html">Sign up here</a></p>
       </div>
 
     </div>
@@ -117,7 +115,7 @@
   <script src="https://www.gstatic.com/firebasejs/9.9.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.9.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.9.0/firebase-auth-compat.js"></script>
-  <script src="js/auth.js" defer></script>
+  <script defer src="js/auth.js" defer></script>
 </body>
 
 </html>
