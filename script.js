@@ -1,4 +1,6 @@
 'use strict';
+let map,destinationLocation;
+let destLat, destLng;
 
 const firebaseApp = firebase.initializeApp({ 
   apiKey: "AIzaSyBybnwAFnoIbIbxbOQMLEHOaiO796YviRY",
@@ -13,17 +15,59 @@ const firebaseApp = firebase.initializeApp({
 
 const db = firebaseApp.firestore();
 const auth = firebaseApp.auth();
+let userData = {}
+
+
+console.log(firebaseApp)
 
 
 firebaseApp.auth().onAuthStateChanged(function(user) {
-
   if (user) {
-    console.log(user)
-    // User is available now
+    userData = user
+    db.collection('user').where('uid','==',user.uid).get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        const userMeta = doc.data()
+        userData = {...userData, phone: userMeta.phoneNumber}
+        initializeEmergencyLocationSharing()
+      })
+    })
   } else {
-    // No user is signed in.
+    window.location.replace('signin.html')
   }
 });
+
+const initializeEmergencyLocationSharing = () =>{
+  db.collection('contact').where("phone", "==", userData.phone).where("emergencyContact", "==", true).get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        const sosFriend = doc.data();
+        if(sosFriend) {
+          db.collection('user').where("uid","==",sosFriend.userID).get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              const contactdata =doc.data()
+              if(contactdata){
+              /*  const dbs = firebaseApp.database()
+                dbs.ref('liveLocationSharing').on('child_added', function(data, prevChildKey) { 
+                  console.log(data)
+                  console.log(prevChildKey)
+
+                }) */
+                db.collection('liveLocationSharing').where('uid', '==', contactdata.uid).get().then((querySnapshot) => {
+                  querySnapshot.forEach((doc) => {
+                    const sosFriendData = doc.data();
+                    const position = { lat: Number(sosFriendData.latitude), lng: Number(sosFriendData.longitude) };
+                    createMarker(map, position)
+                  })
+                })
+              }
+              
+              
+            })
+          })
+        }
+      })
+ });
+}
 
 /* ==================== SPA =======================*/
 
@@ -215,13 +259,12 @@ contactSubmit.addEventListener ("click", function(event) {
     name: contactName.value, //from html id
     phone: contactPhone.value, //from html id
     emergencyContact: cb.checked, //from html checkbox
-    userID: "ictestnotif01",  // get userID after log in, this is just a text id
+    userID: userData.multiFactor.user.uid, 
     contactID: Math.floor(Math.random() * Math.floor(Math.random() * Date.now()))  //generate contact id
   }
     //get user id by firebase doc and add contact into firebase collection-contact by calling function getUserContactsList
   const outcome = contactCollection.add(contact)
 .then((docRef) => {
-    console.log("Document written with ID: ", docRef.id);
     updateContactsListHTML("ictestnotif01");
 })
 .catch((error) => {
@@ -379,6 +422,25 @@ sosEvent.addEventListener ("click", function(event) {
 
 /* =========================== PRERECORDED END =========================== */
 
+
+function init () {
+  destLat = 49.238093;
+  destLng = -123.189117;
+  destinationLocation = new google.maps.LatLng(destLat, destLng);
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 12,
+    center: destinationLocation
+  });
+  const initialPosition = { lat: 49.238093, lng: -123.189117 };
+  createMarker(map, initialPosition)
+}
+
+function createMarker(map, position) {
+  return new google.maps.Marker({ map, position });
+};
+
+
+/*
 const liveLocationCollection = db.collection("liveLocationSharing");
 
 const createMap = ({ lat, lng }) => {
@@ -433,7 +495,9 @@ function init() {
 
 
   trackLocation({
-    onSuccess: ({ coords: { latitude: lat, longitude: lng } }) => {
+    onSuccess: (data) => {
+      console.log(data);
+      //{ coords: { latitude: lat, longitude: lng } }
       marker.setPosition({ lat, lng });
       map.panTo({ lat, lng });
 
@@ -442,11 +506,11 @@ function init() {
         latitude: lat,
         longitude: lng,
         time: new Date(),
-        userID: 'harshit'
-      })
+        userID: userData.multiFactor.user.uid
+      }) 
     },
     onError: err => {
 
     }
   });
-}
+}*/
