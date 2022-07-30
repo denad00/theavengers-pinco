@@ -12,6 +12,11 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://static.vancdn.com/public/js/jquery/jquery-1.12.4.min.js?v=27"></script>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css'
+    integrity='sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=='
+    crossorigin='anonymous' referrerpolicy='no-referrer' />
+
   <script>
     const firebaseApp = firebase.initializeApp({
       apiKey: "AIzaSyBybnwAFnoIbIbxbOQMLEHOaiO796YviRY",
@@ -19,6 +24,7 @@
     });
     const db = firebaseApp.firestore();
     const auth = firebaseApp.auth();
+
   </script>
   <script src="checkin.js" defer></script>
   <script src="contact.js" defer></script>
@@ -51,7 +57,7 @@
       console.warn('Service Worker not available');
     }
   </script>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="sass/css/style.css">
   <link rel="stylesheet" href="prerecorded-calls.css">
 
   <style>
@@ -143,7 +149,7 @@
     </div>
 
     <div id="sosButton">
-      <a href="#page0"><img src="/icons/pinco-icons/sos_1.png" alt="sos button"></a>
+      <a href="#page1"><img src="/icons/pinco-icons/sos_1.png" alt="sos button"></a>
     </div>
 
     <div class="nav-bar" id="menu">
@@ -216,14 +222,9 @@
 
   </header>
 
-
-  <!--     page 1 --- your location -->
   <div class="page" id="page1">
-    <!-- <h2 class="nav-title">Your Location</h2> -->
     <main class="container">
       <div id="map" class="map"></div>
-      <!-- For displaying user's coordinate or error message. -->
-      <div id="info" class="info"></div>
     </main>
   </div>
   <!--     page 2 --- your check-ins -->
@@ -232,7 +233,8 @@
       <div id="current-time"></div>
     </div>
     <h2>Check-in</h2>
-    <div class="caption">When a check-in time hasn't been confirmed, your <span>emergency contacts</span> will be notified.</div>
+    <div class="caption">When a check-in time hasn't been confirmed, your <span>emergency contacts</span> will be
+      notified.</div>
     <div class="alarm-div">
       <h3 id="checkInAlarmStatus">Check-in alarm: off</h3>
       <div id="clockdiv">
@@ -272,18 +274,75 @@
 
     <div class="call-list">
       <ul>
-        <li><a href="prerecorded-calls.html"><svg id="Camada_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36.02 45"><g id="NEW_ICONS"><g id="draf_PLay_Icon"><path d="M5.12,45c-.85,0-1.7-.21-2.47-.63-1.64-.9-2.66-2.62-2.66-4.49V5.13C0,3.2,1.06,1.46,2.78,.57c1.71-.88,3.75-.74,5.32,.38l25.77,18.34c1.39,.99,2.19,2.6,2.15,4.3-.04,1.71-.93,3.27-2.37,4.19L7.87,44.2c-.84,.53-1.79,.8-2.75,.8Zm0-40.23s-.1,.01-.17,.04c-.19,.1-.19,.25-.19,.31V39.88c0,.05,0,.21,.18,.31,.19,.1,.31,.02,.35-.01L31.08,23.76c.1-.07,.16-.16,.16-.28,0-.12-.05-.22-.15-.29L5.32,4.84s-.1-.07-.19-.07Z"/></g></g></svg>Danika Enad</a></li>
-        <li><a href="prerecorded-calls.html"><svg id="Camada_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36.02 45"><g id="NEW_ICONS"><g id="draf_PLay_Icon"><path d="M5.12,45c-.85,0-1.7-.21-2.47-.63-1.64-.9-2.66-2.62-2.66-4.49V5.13C0,3.2,1.06,1.46,2.78,.57c1.71-.88,3.75-.74,5.32,.38l25.77,18.34c1.39,.99,2.19,2.6,2.15,4.3-.04,1.71-.93,3.27-2.37,4.19L7.87,44.2c-.84,.53-1.79,.8-2.75,.8Zm0-40.23s-.1,.01-.17,.04c-.19,.1-.19,.25-.19,.31V39.88c0,.05,0,.21,.18,.31,.19,.1,.31,.02,.35-.01L31.08,23.76c.1-.07,.16-.16,.16-.28,0-.12-.05-.22-.15-.29L5.32,4.84s-.1-.07-.19-.07Z"/></g></g></svg>Iris Chen</a></li>
-        <li><a href="prerecorded-calls.html"><svg id="Camada_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36.02 45"><g id="NEW_ICONS"><g id="draf_PLay_Icon"><path d="M5.12,45c-.85,0-1.7-.21-2.47-.63-1.64-.9-2.66-2.62-2.66-4.49V5.13C0,3.2,1.06,1.46,2.78,.57c1.71-.88,3.75-.74,5.32,.38l25.77,18.34c1.39,.99,2.19,2.6,2.15,4.3-.04,1.71-.93,3.27-2.37,4.19L7.87,44.2c-.84,.53-1.79,.8-2.75,.8Zm0-40.23s-.1,.01-.17,.04c-.19,.1-.19,.25-.19,.31V39.88c0,.05,0,.21,.18,.31,.19,.1,.31,.02,.35-.01L31.08,23.76c.1-.07,.16-.16,.16-.28,0-.12-.05-.22-.15-.29L5.32,4.84s-.1-.07-.19-.07Z"/></g></g></svg>YuenKi Hung</a></li>
-        <li><a href="prerecorded-calls.html"><svg id="Camada_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36.02 45"><g id="NEW_ICONS"><g id="draf_PLay_Icon"><path d="M5.12,45c-.85,0-1.7-.21-2.47-.63-1.64-.9-2.66-2.62-2.66-4.49V5.13C0,3.2,1.06,1.46,2.78,.57c1.71-.88,3.75-.74,5.32,.38l25.77,18.34c1.39,.99,2.19,2.6,2.15,4.3-.04,1.71-.93,3.27-2.37,4.19L7.87,44.2c-.84,.53-1.79,.8-2.75,.8Zm0-40.23s-.1,.01-.17,.04c-.19,.1-.19,.25-.19,.31V39.88c0,.05,0,.21,.18,.31,.19,.1,.31,.02,.35-.01L31.08,23.76c.1-.07,.16-.16,.16-.28,0-.12-.05-.22-.15-.29L5.32,4.84s-.1-.07-.19-.07Z"/></g></g></svg>Harshit Punn</a></li>
-        <li><a href="prerecorded-calls.html"><svg id="Camada_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36.02 45"><g id="NEW_ICONS"><g id="draf_PLay_Icon"><path d="M5.12,45c-.85,0-1.7-.21-2.47-.63-1.64-.9-2.66-2.62-2.66-4.49V5.13C0,3.2,1.06,1.46,2.78,.57c1.71-.88,3.75-.74,5.32,.38l25.77,18.34c1.39,.99,2.19,2.6,2.15,4.3-.04,1.71-.93,3.27-2.37,4.19L7.87,44.2c-.84,.53-1.79,.8-2.75,.8Zm0-40.23s-.1,.01-.17,.04c-.19,.1-.19,.25-.19,.31V39.88c0,.05,0,.21,.18,.31,.19,.1,.31,.02,.35-.01L31.08,23.76c.1-.07,.16-.16,.16-.28,0-.12-.05-.22-.15-.29L5.32,4.84s-.1-.07-.19-.07Z"/></g></g></svg>Joanne Cho</a></li>
-        <li><a href="prerecorded-calls.html"><svg id="Camada_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36.02 45"><g id="NEW_ICONS"><g id="draf_PLay_Icon"><path d="M5.12,45c-.85,0-1.7-.21-2.47-.63-1.64-.9-2.66-2.62-2.66-4.49V5.13C0,3.2,1.06,1.46,2.78,.57c1.71-.88,3.75-.74,5.32,.38l25.77,18.34c1.39,.99,2.19,2.6,2.15,4.3-.04,1.71-.93,3.27-2.37,4.19L7.87,44.2c-.84,.53-1.79,.8-2.75,.8Zm0-40.23s-.1,.01-.17,.04c-.19,.1-.19,.25-.19,.31V39.88c0,.05,0,.21,.18,.31,.19,.1,.31,.02,.35-.01L31.08,23.76c.1-.07,.16-.16,.16-.28,0-.12-.05-.22-.15-.29L5.32,4.84s-.1-.07-.19-.07Z"/></g></g></svg>Giancarlo Cochella</a></li>
-        <li><a href="prerecorded-calls.html"><svg id="Camada_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36.02 45"><g id="NEW_ICONS"><g id="draf_PLay_Icon"><path d="M5.12,45c-.85,0-1.7-.21-2.47-.63-1.64-.9-2.66-2.62-2.66-4.49V5.13C0,3.2,1.06,1.46,2.78,.57c1.71-.88,3.75-.74,5.32,.38l25.77,18.34c1.39,.99,2.19,2.6,2.15,4.3-.04,1.71-.93,3.27-2.37,4.19L7.87,44.2c-.84,.53-1.79,.8-2.75,.8Zm0-40.23s-.1,.01-.17,.04c-.19,.1-.19,.25-.19,.31V39.88c0,.05,0,.21,.18,.31,.19,.1,.31,.02,.35-.01L31.08,23.76c.1-.07,.16-.16,.16-.28,0-.12-.05-.22-.15-.29L5.32,4.84s-.1-.07-.19-.07Z"/></g></g></svg>Clara Pedrosa</a></li>
+        <li><a href="prerecorded-calls.html"><svg id="Camada_2" xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 36.02 45">
+              <g id="NEW_ICONS">
+                <g id="draf_PLay_Icon">
+                  <path
+                    d="M5.12,45c-.85,0-1.7-.21-2.47-.63-1.64-.9-2.66-2.62-2.66-4.49V5.13C0,3.2,1.06,1.46,2.78,.57c1.71-.88,3.75-.74,5.32,.38l25.77,18.34c1.39,.99,2.19,2.6,2.15,4.3-.04,1.71-.93,3.27-2.37,4.19L7.87,44.2c-.84,.53-1.79,.8-2.75,.8Zm0-40.23s-.1,.01-.17,.04c-.19,.1-.19,.25-.19,.31V39.88c0,.05,0,.21,.18,.31,.19,.1,.31,.02,.35-.01L31.08,23.76c.1-.07,.16-.16,.16-.28,0-.12-.05-.22-.15-.29L5.32,4.84s-.1-.07-.19-.07Z" />
+                </g>
+              </g>
+            </svg>Danika Enad</a></li>
+        <li><a href="prerecorded-calls.html"><svg id="Camada_2" xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 36.02 45">
+              <g id="NEW_ICONS">
+                <g id="draf_PLay_Icon">
+                  <path
+                    d="M5.12,45c-.85,0-1.7-.21-2.47-.63-1.64-.9-2.66-2.62-2.66-4.49V5.13C0,3.2,1.06,1.46,2.78,.57c1.71-.88,3.75-.74,5.32,.38l25.77,18.34c1.39,.99,2.19,2.6,2.15,4.3-.04,1.71-.93,3.27-2.37,4.19L7.87,44.2c-.84,.53-1.79,.8-2.75,.8Zm0-40.23s-.1,.01-.17,.04c-.19,.1-.19,.25-.19,.31V39.88c0,.05,0,.21,.18,.31,.19,.1,.31,.02,.35-.01L31.08,23.76c.1-.07,.16-.16,.16-.28,0-.12-.05-.22-.15-.29L5.32,4.84s-.1-.07-.19-.07Z" />
+                </g>
+              </g>
+            </svg>Iris Chen</a></li>
+        <li><a href="prerecorded-calls.html"><svg id="Camada_2" xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 36.02 45">
+              <g id="NEW_ICONS">
+                <g id="draf_PLay_Icon">
+                  <path
+                    d="M5.12,45c-.85,0-1.7-.21-2.47-.63-1.64-.9-2.66-2.62-2.66-4.49V5.13C0,3.2,1.06,1.46,2.78,.57c1.71-.88,3.75-.74,5.32,.38l25.77,18.34c1.39,.99,2.19,2.6,2.15,4.3-.04,1.71-.93,3.27-2.37,4.19L7.87,44.2c-.84,.53-1.79,.8-2.75,.8Zm0-40.23s-.1,.01-.17,.04c-.19,.1-.19,.25-.19,.31V39.88c0,.05,0,.21,.18,.31,.19,.1,.31,.02,.35-.01L31.08,23.76c.1-.07,.16-.16,.16-.28,0-.12-.05-.22-.15-.29L5.32,4.84s-.1-.07-.19-.07Z" />
+                </g>
+              </g>
+            </svg>YuenKi Hung</a></li>
+        <li><a href="prerecorded-calls.html"><svg id="Camada_2" xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 36.02 45">
+              <g id="NEW_ICONS">
+                <g id="draf_PLay_Icon">
+                  <path
+                    d="M5.12,45c-.85,0-1.7-.21-2.47-.63-1.64-.9-2.66-2.62-2.66-4.49V5.13C0,3.2,1.06,1.46,2.78,.57c1.71-.88,3.75-.74,5.32,.38l25.77,18.34c1.39,.99,2.19,2.6,2.15,4.3-.04,1.71-.93,3.27-2.37,4.19L7.87,44.2c-.84,.53-1.79,.8-2.75,.8Zm0-40.23s-.1,.01-.17,.04c-.19,.1-.19,.25-.19,.31V39.88c0,.05,0,.21,.18,.31,.19,.1,.31,.02,.35-.01L31.08,23.76c.1-.07,.16-.16,.16-.28,0-.12-.05-.22-.15-.29L5.32,4.84s-.1-.07-.19-.07Z" />
+                </g>
+              </g>
+            </svg>Harshit Punn</a></li>
+        <li><a href="prerecorded-calls.html"><svg id="Camada_2" xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 36.02 45">
+              <g id="NEW_ICONS">
+                <g id="draf_PLay_Icon">
+                  <path
+                    d="M5.12,45c-.85,0-1.7-.21-2.47-.63-1.64-.9-2.66-2.62-2.66-4.49V5.13C0,3.2,1.06,1.46,2.78,.57c1.71-.88,3.75-.74,5.32,.38l25.77,18.34c1.39,.99,2.19,2.6,2.15,4.3-.04,1.71-.93,3.27-2.37,4.19L7.87,44.2c-.84,.53-1.79,.8-2.75,.8Zm0-40.23s-.1,.01-.17,.04c-.19,.1-.19,.25-.19,.31V39.88c0,.05,0,.21,.18,.31,.19,.1,.31,.02,.35-.01L31.08,23.76c.1-.07,.16-.16,.16-.28,0-.12-.05-.22-.15-.29L5.32,4.84s-.1-.07-.19-.07Z" />
+                </g>
+              </g>
+            </svg>Joanne Cho</a></li>
+        <li><a href="prerecorded-calls.html"><svg id="Camada_2" xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 36.02 45">
+              <g id="NEW_ICONS">
+                <g id="draf_PLay_Icon">
+                  <path
+                    d="M5.12,45c-.85,0-1.7-.21-2.47-.63-1.64-.9-2.66-2.62-2.66-4.49V5.13C0,3.2,1.06,1.46,2.78,.57c1.71-.88,3.75-.74,5.32,.38l25.77,18.34c1.39,.99,2.19,2.6,2.15,4.3-.04,1.71-.93,3.27-2.37,4.19L7.87,44.2c-.84,.53-1.79,.8-2.75,.8Zm0-40.23s-.1,.01-.17,.04c-.19,.1-.19,.25-.19,.31V39.88c0,.05,0,.21,.18,.31,.19,.1,.31,.02,.35-.01L31.08,23.76c.1-.07,.16-.16,.16-.28,0-.12-.05-.22-.15-.29L5.32,4.84s-.1-.07-.19-.07Z" />
+                </g>
+              </g>
+            </svg>Giancarlo Cochella</a></li>
+        <li><a href="prerecorded-calls.html"><svg id="Camada_2" xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 36.02 45">
+              <g id="NEW_ICONS">
+                <g id="draf_PLay_Icon">
+                  <path
+                    d="M5.12,45c-.85,0-1.7-.21-2.47-.63-1.64-.9-2.66-2.62-2.66-4.49V5.13C0,3.2,1.06,1.46,2.78,.57c1.71-.88,3.75-.74,5.32,.38l25.77,18.34c1.39,.99,2.19,2.6,2.15,4.3-.04,1.71-.93,3.27-2.37,4.19L7.87,44.2c-.84,.53-1.79,.8-2.75,.8Zm0-40.23s-.1,.01-.17,.04c-.19,.1-.19,.25-.19,.31V39.88c0,.05,0,.21,.18,.31,.19,.1,.31,.02,.35-.01L31.08,23.76c.1-.07,.16-.16,.16-.28,0-.12-.05-.22-.15-.29L5.32,4.84s-.1-.07-.19-.07Z" />
+                </g>
+              </g>
+            </svg>Clara Pedrosa</a></li>
       </ul>
     </div>
   </div>
   <!--     page 4 --- contact -->
   <div class="page" id="page4">
+
     <div class="contact-header">
       <h2>Contact</h2>
     </div>
@@ -294,13 +353,120 @@
       <button id="createBtn">Create</button>
       <h3>Emergency contacts</h3>
       <div id="emergencyContactsOutput"></div>
+      <div class="sendsmsContainer"><a href="#page4" class="info_call_sms" id="sendsms" data-phone="+1 (778) 320-0003"
+          data-body="Hey! I have set you as my emergency contact! Please open this link in your browser and allow permission of push notifications so that you can receive my sos msg when there is an emergency https://pincocontactobserverpage.irischen11.repl.co/?userId=ictestnotif01 "><span
+            class="flex flex_valign_center flex_halign_center">Click here to fulfill setting up emergency
+            contacts</span></a></div>
       <h3>Other saved Contacts</h3>
+      <div id="emergencyContactsOutput"></div>
+      <h3>Emergency contacts</h3>
       <div id="otherContactsOutput"></div>
     </div>
 
+
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+    <script>
+      //发送短信
+      os = "";
+      $(document).on('click', '#sendsms', function () {
+        var phone = $(this).attr('data-phone');
+        var body = $(this).attr('data-body');
+        sendSMS(phone, body, os);
+      });
+
+      function sendSMS(phone = '', body = '', os = '') {
+        if (phone.length <= 0) {
+          return '';
+        }
+        var sign = isIOS() ? '&' : '?';
+        var smsURL = 'sms:' + phone + sign + 'body=' + decodeURI(body.replace(/\&/g, ' '));
+        if (os == 'android') {
+          android.sendMsg(phone, body);
+        }
+        else if (os == 'ios') {
+          var sendSMSObj = { phone: phone, body: body };
+          window.webkit.messageHandlers.sendMsg.postMessage(sendSMSObj);
+        }
+        else {
+          console.log("[sendSMS] goto");
+          goto(smsURL);
+        }
+      }
+
+      /* 判断android与ios*/
+      function isIOS() {
+        var u = navigator.userAgent, app = navigator.appVersion;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+        return isiOS;
+      }
+      /**
+       * 跳转页面方法
+       * @param url 跳转到指定的url
+       * @param closeCurrentPage 跳转之前是否需要关闭当前页面，0否，1是,2关闭当前页面和上一个页面，针对app上使用,_blank为新窗口打开
+       * @param isFullUrl 是否是全网址,前面带域名的 1是，0否，针对app上使用
+       */
+      function goto(url = '', closeCurrentPage = 0, isFullUrl = 0) {
+        if (typeof (FROM) != "undefined" && FROM == 'app') {//app访问
+          if (url == -1 || url == '' || url == 'close') {//返回上一页
+            if (OS == "android") {
+              if (closeCurrentPage == 2) {//关闭当前页面和上一个页面
+                android.toback(2);
+              } else {
+                android.toback();
+              }
+            } else if (OS == "ios") {
+              var tobackObj = { toback: 1 };
+              if (closeCurrentPage == 2) {//关闭当前页面和上一个页面
+                tobackObj = { toback: 2 };
+              }
+              window.webkit.messageHandlers.toback.postMessage(tobackObj);
+            }
+          } else {//跳转到指定页面
+            if (url.charAt(0) == "/") { url = url.substr(1); }//去除前面斜杠
+            if (OS == "android") {
+              if (closeCurrentPage == 1) {//先返回再跳转
+                android.skipurl_finish(url, isFullUrl);
+              } else {
+                android.skipurl(url, isFullUrl);
+              }
+            } else if (OS == "ios") {
+              if (closeCurrentPage == 1) {//先返回再跳转
+                var skipurl_finishObj = { url: url, isFull: isFullUrl };
+                window.webkit.messageHandlers.skipurl_finish.postMessage(skipurl_finishObj);
+              } else {
+                var skipurlObj = { skipurl: url, isFull: isFullUrl };
+                window.webkit.messageHandlers.skipurl.postMessage(skipurlObj);
+              }
+            }
+          }
+        } else {//h5访问
+          var target = closeCurrentPage || '_self';
+          if (['_self', '_blank'].indexOf(target) <= -1) {
+            target = '_self';
+          }
+          if (url == 'close') {//返回关闭当前页并返回上一步
+            try {
+              window.WeixinJSBridge.call('closeWindow');
+            } catch (e) {
+              window.history.back();
+            }
+          } else if (url == -1 || url == '' || url == null) {
+            history.go(-1);
+          } else {
+            /*var nextPage = document.createElement('a');
+            nextPage.setAttribute('href', url);
+            nextPage.setAttribute('target', target);
+            nextPage.click();*/
+            window.open(url, target);
+          }
+        }
+      }
+    </script>
+
     <div class="contactFlow" id="contactFlow1">
       <p>When you activate emergency SOS button, it sends a message with your current location to your emergency
-        contacts via SMS. </p>
+        contacts. </p>
       <div class="contactCard">
         <h3>Contact</h3>
         <form action="#" method="get">
@@ -329,6 +495,7 @@
   <script type="text/javascript">
     document.getElementById('logout').addEventListener('click', (e) => {
       firebaseApp.auth().signOut();
+      localStorage.setItem('user', null)
       window.location.replace('signin.html');
     })
   </script>
@@ -337,7 +504,7 @@
   <script src="https://www.gstatic.com/firebasejs/9.9.0/firebase-auth-compat.js"></script>
   <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFE6wLa6xJlZesSSLEH1TyntvwJyqJXMw&callback=init"></script>
-  <script src="script.js"></script>
+  <script defer src="script.js"></script>
 </body>
 
 </html>
