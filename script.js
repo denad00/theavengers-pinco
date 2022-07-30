@@ -68,7 +68,7 @@ function init() {
         latitude: lat,
         longitude: lng,
         time: new Date(),
-        userID: 'harshit'
+        userID: 'ally'
       })
     },
     onError: err => {
