@@ -25,16 +25,16 @@ function loadSong(songs) {
 
 function playCall() {
     callContainer.classList.add('play');
-    playBtn.querySelector('i.fa-solid').classList.remove('fa-play')
-    playBtn.querySelector('i.fa-solid').classList.add('fa-pause')
+    playBtn.querySelector('svg.play').classList.remove('svg.play')
+    playBtn.querySelector('svg.play').classList.add('svg.pause')
 
     audio.play()
 }
 
 function pauseCall() {
     callContainer.classList.remove('play');
-    playBtn.querySelector('i.fa-solid').classList.add('fa-play')
-    playBtn.querySelector('i.fa-solid').classList.remove('fa-pause')
+    playBtn.querySelector('svg.play').classList.add('svg.play')
+    playBtn.querySelector('svg.play').classList.remove('svg.pause')
 
     audio.pause()
 }
