@@ -17,24 +17,30 @@ const db = firebaseApp.firestore();
 const auth = firebaseApp.auth();
 let userData = {}
 
-
-console.log(firebaseApp)
+let lat = 0,lang =0;
 
 
 firebaseApp.auth().onAuthStateChanged(function(user) {
   if (user) {
     userData = user
-    db.collection('user').where('uid','==',user.uid).get().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        const userMeta = doc.data()
-        userData = {...userData, phone: userMeta.phoneNumber}
-        initializeEmergencyLocationSharing()
-      })
-    })
+    setInterval(() => {
+      checkSosFriends()
+    },2000);
+
   } else {
     window.location.replace('signin.html')
   }
 });
+
+const checkSosFriends = () => {
+  db.collection('user').where('uid','==',userData.multiFactor.user.uid).get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      const userMeta = doc.data()
+      userData = {...userData, phone: userMeta.phoneNumber}
+      initializeEmergencyLocationSharing()
+    })
+  })
+}
 
 const initializeEmergencyLocationSharing = () =>{
   db.collection('contact').where("phone", "==", userData.phone).where("emergencyContact", "==", true).get()
@@ -42,21 +48,18 @@ const initializeEmergencyLocationSharing = () =>{
       querySnapshot.forEach((doc) => {
         const sosFriend = doc.data();
         if(sosFriend) {
-          db.collection('user').where("uid","==",sosFriend.userID).get().then((querySnapshot) => {
+          db.collection('user').where("uid","==",sosFriend.userID).where("sosEvent", "==", true).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
               const contactdata =doc.data()
               if(contactdata){
-              /*  const dbs = firebaseApp.database()
-                dbs.ref('liveLocationSharing').on('child_added', function(data, prevChildKey) { 
-                  console.log(data)
-                  console.log(prevChildKey)
-
-                }) */
-                db.collection('liveLocationSharing').where('uid', '==', contactdata.uid).get().then((querySnapshot) => {
+                db.collection('liveLocationSharing').where('userID', '==', contactdata.uid).get().then((querySnapshot) => {
                   querySnapshot.forEach((doc) => {
                     const sosFriendData = doc.data();
                     const position = { lat: Number(sosFriendData.latitude), lng: Number(sosFriendData.longitude) };
-                    createMarker(map, position)
+                      createMarker(map, position)
+                      lat = position.lat
+                      lang= position.lng
+                
                   })
                 })
               }
