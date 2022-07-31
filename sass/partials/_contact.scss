@@ -65,5 +65,37 @@
             justify-content: center;
         }
 
+        li {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: flex-start;
+            button {
+                background-color: white;
+                .star {
+                    height: 20px;
+                    width: 20px;
+                }
+
+                .trash {
+                    height:20px;
+                    width: 20px;
+                }
+            &:hover {
+                cursor: pointer;
+            }
+            }
+        }
+
+
+        #emergencyContactsOutput {
+            li {
+                button {
+                    .star {
+                        fill: $color-hover;
+                    }
+                }
+            }
+        }
+
     }
 }
