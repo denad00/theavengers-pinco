@@ -470,6 +470,41 @@
     </div>
   </div>
 
+  <div class="page" id="page5">
+    <h1>My Account</h1>
+    <div class="account-form">
+      <div id="camerasetup">
+        <div class="video-block" id="video-block">
+          <video id="video" autoplay></video>
+          <canvas id="canvas" width="200" height="200"></canvas>
+        </div>
+        <div class="camera-controls">
+          <button id="start-camera">Start Camera</button>
+          <button id="camera_stop" style="display:none;">Stop Camera</button>
+          <button id="click-photo" style="display:none;">Click Photo</button>
+        </div>
+      </div>
+      <form method="post" id="account">
+        <div class="form-group">
+          <label for="accountdisplayName">Display Name*:</label>
+          <input type="text" id="accountdisplayName" placeholder="Enter your name here" required>
+        </div>
+        <div class="form-group">
+          <label for="accountemail">Email*:</label>
+          <input type="email" id="accountemail" placeholder="Enter your email here" required disabled>
+        </div>
+        <div class="form-group">
+          <label for="accountpassword">Password*:</label>
+          <input type="password" id="accountpassword" placeholder="Enter your password" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number*:</label>
+          <input type="tel" id="phone" pattern="[0-9]{10}" placeholder="2334455667" required />
+        </div>
+        <button type="submit" id="saveAccount">Save</button>
+      </form>
+    </div>
+  </div>
 
   </main>
   <footer class="footer">

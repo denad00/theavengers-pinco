@@ -1,0 +1,52 @@
+
+.account-form {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1.4rem;
+  background-color:  $background-color-light;
+  border-radius: 6%;
+  margin-top: 1%;
+  padding: 7% 5% 6% 5%;
+  width: 100%;
+  box-shadow: 3px 3px 3px 3px $box-shadow-color; 
+
+    #video {
+        border-radius: 50%;
+        object-fit: cover;
+        width: 200px;
+        height: 200px;
+    }
+
+    #profile-photo, #canvas {
+        border-radius: 50%;
+        width: 200px;
+        height: 200px; 
+    }
+
+  form {
+      display:flex;
+      flex-flow:column nowrap;
+      gap:1.4rem; 
+  }
+
+  input {
+      padding:1.5%;
+  }
+
+  .form-group {
+      display:flex;
+      flex-flow:column nowrap;
+      gap:0.8rem;
+  }
+
+  #saveAccount {
+      padding:1.5%;
+      background-color: $color-main-dark;
+      color: $font-color-light;
+      border-color: #3E62FF;
+      margin-top: 1.5%;
+      align-self:center;
+      width:30%;
+  }
+
+}

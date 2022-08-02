@@ -517,3 +517,49 @@ function init() {
     }
   });
 }*/
+
+/* ========================= ACCOUNT =======================*/
+
+let camera_button = document.querySelector("#start-camera");
+let video = document.querySelector("#video");
+let click_button = document.querySelector("#click-photo");
+let canvas = document.querySelector("#canvas");
+let stop_camera = document.querySelector("#camera_stop");
+let stream;
+
+camera_button.addEventListener('click', async function() {
+  canvas.style.display="none"
+  video.style.display = "inline";
+  stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+	video.srcObject = stream; 
+  camera_stop.style.display="inline"
+  camera_button.style.display= "none"
+  click_button.style.display = "inline"
+});
+
+click_button.addEventListener('click', function() {
+  camera_stop.style.display="none"
+  camera_button.style.display= "inline"
+   	canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+   	let image_data_url = canvas.toDataURL('image/jpeg');
+   	console.log(image_data_url);
+     fetch(image_data_url)
+     .then(res => res.blob())
+     .then(data => console.log(URL.createObjectURL(data)))
+     stream.getTracks().forEach(function(track) {
+      track.stop();
+    }); 
+    video.style.display = "none"
+    canvas.style.display="inline"
+});
+
+stop_camera.addEventListener('click', function() { 
+  stream.getTracks().forEach(function(track) {
+    track.stop();
+    camera_stop.style.display="none"
+    camera_button.style.display= "inline"
+    canvas.style.display="none"
+    video.style.display="none"
+    click_button.style.display = "none"
+  }); 
+})
