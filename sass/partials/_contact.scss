@@ -98,4 +98,11 @@
         }
 
     }
+
+    .submitArea{
+
+        button:nth-of-type(1):hover {
+            background-color: grey;
+        }
+    }
 }
