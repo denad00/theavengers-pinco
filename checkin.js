@@ -31,7 +31,7 @@ const handleSubmit = (event) => {
         createNewCheckInSession(checkinUserId, checkInTime);
         document.getElementById("cancelButton").style.display = 'inline';
         document.getElementById("createTimer").style.display = 'none';
-        document.getElementById("checkInAlarmStatus").innerText = 'Check-in alarm: on';
+        document.getElementById("checkInAlarmStatus").innerText = 'Check-in alarm: ON';
         setTime.disabled = true;
         activeAlarm = true;
     }
@@ -82,7 +82,7 @@ const handleCancel = (event) => {
     currSessionRef = null;
     document.getElementById("cancelButton").style.display = 'none';
     document.getElementById("createTimer").style.display = 'inline';
-    document.getElementById("checkInAlarmStatus").innerText = 'Check-in alarm: off';
+    document.getElementById("checkInAlarmStatus").innerText = 'Check-in alarm: OFF';
     
     document.getElementById('timeinput').disabled = false;
     activeAlarm = false;
