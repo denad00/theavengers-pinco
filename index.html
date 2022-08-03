@@ -58,7 +58,6 @@
     }
   </script>
   <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="prerecorded-calls.css">
 
   <style>
     .container {
@@ -253,7 +252,7 @@
           </div>
           <div class="form-actions" id="checkinform">
             <form>
-              <label for="startTime">Time:</label>
+              <label for="startTime">Input your check-in time:</label>
               <input type="time" id="timeinput">
               <button id="createTimer">Turn On</button>
               <button id="cancelButton">Disable</button>
@@ -354,7 +353,7 @@
       <h3>Emergency contacts</h3>
       <div id="emergencyContactsOutput"></div>
       <div class="sendsmsContainer"><a href="#page4" class="info_call_sms" id="sendsms" data-phone="+1 (778) 320-0003"
-          data-body="Hey! I have set you as my emergency contact! Please open this link in your browser and allow permission of push notifications so that you can receive my sos msg when there is an emergency https://pincocontactobserverpage.irischen11.repl.co/?userId=ictestnotif01 "><span
+          data-body="Hey Iris! I have set you as my emergency contact! Please open this link in your browser and allow permission of push notifications so that you can receive my sos msg when there is an emergency https://pincocontactobserverpage.irischen11.repl.co/?userId=ZgYDZfWZeRWYgPXWzFHeCesYy9J3 "><span
             class="flex flex_valign_center flex_halign_center">Click here to fulfill setting up emergency
             contacts</span></a></div>
       <h3>Other saved Contacts</h3>
@@ -477,8 +476,8 @@
             <label for=""> Emergency contact</label><br>
           </div>
           <div class="submitArea">
-            <button type="reset" value="Reset">Cancel</button>
-            <button type="submit" value="Submit" id="contactSubmit">Confirm</button>
+            <button id="cancelContact" type="reset" value="Reset">Cancel</button>
+            <button id="submitContact" type="submit" value="Submit" id="contactSubmit">Confirm</button>
           </div>
         </form>
       </div>
