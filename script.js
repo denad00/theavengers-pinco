@@ -33,7 +33,7 @@ firebaseApp.auth().onAuthStateChanged(function(user) {
 });
 
 const checkSosFriends = () => {
-  db.collection('userStatus').where('uid','==',userData.multiFactor.user.uid).get().then((querySnapshot) => {
+  db.collection('user').where('uid','==',userData.multiFactor.user.uid).get().then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
       const userMeta = doc.data()
       userData = {...userData, phone: userMeta.phoneNumber}
@@ -108,6 +108,10 @@ function menuToggler() {
 
 const checkInSessionCollection = db.collection("checkInSession");
 
+const checkinUserJson = localStorage.getItem('user');
+const checkinUserObj = JSON.parse(checkinUserJson);
+const checkinUserId = checkinUserObj.uid;
+
 // init alarm audio just for prototype
 const alarmAudio = document.getElementById("alarm-audio");
 alarmAudio.src = "http://soundbible.com/grab.php?id=2197&type=mp3";
@@ -131,7 +135,7 @@ const handleSubmit = (event) => {
         fullTime.setMinutes(checkInTime[1]);
         fullTime.setSeconds(0);
         checkInTime = fullTime;
-        createNewCheckInSession("ictestnotif01", checkInTime);
+        createNewCheckInSession(checkinUserId, checkInTime);
         document.getElementById("cancelButton").style.display = 'inline';
         document.getElementById("createTimer").style.display = 'none';
         document.getElementById("checkInAlarmStatus").innerText = 'Check-in alarm: on';
