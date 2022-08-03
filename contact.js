@@ -1,6 +1,10 @@
 
 // init database
-const contactCollection = db.collection("contact")
+const contactCollection = db.collection("contact");
+
+const contactPageUserJson = localStorage.getItem('user');
+const contactPageUserObj = JSON.parse(contactPageUserJson);
+const contactPageUserId = contactPageUserObj.uid;
 
 const allFlows = document.querySelectorAll('div.contactFlow')
 const otherContactsOutput = document.getElementById("otherContactsOutput");
@@ -9,7 +13,7 @@ console.log(allFlows)
 allFlows[0].style.display = 'block';
 allFlows[1].style.display = 'none';
 if (allFlows[0].style.display = 'block') {
-  updateContactsListHTML("ictestnotif01");
+  updateContactsListHTML(contactPageUserId);
 }  //show current contact list
 
 const createBtn = document.getElementById("createBtn");
@@ -30,14 +34,14 @@ contactSubmit.addEventListener ("click", function(event) {
     name: contactName.value, //from html id
     phone: contactPhone.value, //from html id
     emergencyContact: cb.checked, //from html checkbox
-    userID: "ictestnotif01",  // get userID after log in, this is just a text id
+    userID: contactPageUserId,  // get userID after log in, this is just a text id
     contactID: Math.floor(Math.random() * Math.floor(Math.random() * Date.now()))  //generate contact id
   }
     //get user id by firebase doc and add contact into firebase collection-contact by calling function getUserContactsList
   const outcome = contactCollection.add(contact)
 .then((docRef) => {
     console.log("Document written with ID: ", docRef.id);
-    updateContactsListHTML("ictestnotif01");
+    updateContactsListHTML(contactPageUserId);
 })
 .catch((error) => {
     console.error("Error adding document: ", error);
