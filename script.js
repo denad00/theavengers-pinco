@@ -1,6 +1,7 @@
 'use strict';
 let map,destinationLocation;
 let destLat, destLng;
+let markers = [];
 
 const firebaseApp = firebase.initializeApp({ 
   apiKey: "AIzaSyBybnwAFnoIbIbxbOQMLEHOaiO796YviRY",
@@ -25,7 +26,7 @@ firebaseApp.auth().onAuthStateChanged(function(user) {
     userData = user
     setInterval(() => {
       checkSosFriends()
-    },2000);
+    },1000);
 
   } else {
     window.location.replace('signin.html')
@@ -48,11 +49,11 @@ const initializeEmergencyLocationSharing = () =>{
       querySnapshot.forEach((doc) => {
         const sosFriend = doc.data();
         if(sosFriend) {
-          db.collection('user').where("uid","==",sosFriend.userID).where("sosEvent", "==", true).get().then((querySnapshot) => {
+          db.collection('userStatus').where('userID',"==",sosFriend.userID).where("sosEvent", "==", true).get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
               const contactdata =doc.data()
               if(contactdata){
-                db.collection('liveLocationSharing').where('userID', '==', contactdata.uid).get().then((querySnapshot) => {
+                db.collection('liveLocationSharing').where('userID', '==', contactdata.userID).orderBy("time", "desc").limit(1).get().then((querySnapshot) => {
                   querySnapshot.forEach((doc) => {
                     const sosFriendData = doc.data();
                     const position = { lat: Number(sosFriendData.latitude), lng: Number(sosFriendData.longitude) };
