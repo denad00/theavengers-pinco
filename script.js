@@ -63,8 +63,6 @@ const initializeEmergencyLocationSharing = () =>{
                   })
                 })
               }
-              
-              
             })
           })
         }
@@ -525,7 +523,9 @@ let video = document.querySelector("#video");
 let click_button = document.querySelector("#click-photo");
 let canvas = document.querySelector("#canvas");
 let stop_camera = document.querySelector("#camera_stop");
+let upload_photo = document.querySelector("#upload_photo");
 let stream;
+let image;
 
 camera_button.addEventListener('click', async function() {
   canvas.style.display="none"
@@ -540,12 +540,14 @@ camera_button.addEventListener('click', async function() {
 click_button.addEventListener('click', function() {
   camera_stop.style.display="none"
   camera_button.style.display= "inline"
+  upload_photo.style.display = "inline"
    	canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
    	let image_data_url = canvas.toDataURL('image/jpeg');
-   	console.log(image_data_url);
      fetch(image_data_url)
      .then(res => res.blob())
-     .then(data => console.log(URL.createObjectURL(data)))
+     .then(data =>{ 
+        image = data
+    })
      stream.getTracks().forEach(function(track) {
       track.stop();
     }); 
@@ -562,4 +564,43 @@ stop_camera.addEventListener('click', function() {
     video.style.display="none"
     click_button.style.display = "none"
   }); 
+})
+
+upload_photo.addEventListener('click', function() { 
+  firebaseApp.storage().ref('users/'+userData.multiFactor.user.uid+'/profile.jpg').put(image).then((snapshot)=>{
+    snapshot.ref.getDownloadURL().then(function(downloadURL) {
+      auth.currentUser.updateProfile({
+        photoURL: downloadURL,
+      }).then(() => {
+        upload_photo.style.display ="none"
+        click_button.style.display = "none"
+      })
+    });
+
+  }).catch(error => {
+    console.log(error)
+  })
+});
+
+let account = document.getElementById("account")
+
+account.addEventListener('submit',(e) =>{
+  e.preventDefault();
+  let displayName = document.getElementById('accountdisplayName').value
+  let email = document.getElementById('accountemail').value
+  let password = document.getElementById('accountpassword').value
+  let phone = document.getElementById('phone').value
+
+  db.collection("user").doc(userData.multiFactor.user.uid).update({uid: userData.multiFactor.user.uid, phoneNumber: phone, email: email}).then(() =>{
+    auth.currentUser.updateProfile({
+      displayName: displayName
+    }).then(() =>{
+      auth.updatePassword(password).then(() => {
+        // Update successful.
+      }, (error) => {
+        // An error happened.
+      });
+    })
+  })
+
 })
