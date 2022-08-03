@@ -33,7 +33,7 @@ firebaseApp.auth().onAuthStateChanged(function(user) {
 });
 
 const checkSosFriends = () => {
-  db.collection('user').where('uid','==',userData.multiFactor.user.uid).get().then((querySnapshot) => {
+  db.collection('userStatus').where('uid','==',userData.multiFactor.user.uid).get().then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
       const userMeta = doc.data()
       userData = {...userData, phone: userMeta.phoneNumber}
