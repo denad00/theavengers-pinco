@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>🌏 Google Maps Geolocation Example</title>
+  <title>PinCo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <style>
     html {
@@ -51,23 +51,14 @@
 <body>
   <main class="container">
     <div id="map" class="map"></div>
-    <!-- For displaying user's coordinate or error message. -->
-    <div id="info" class="info"></div>
   </main>
   <script src="https://www.gstatic.com/firebasejs/9.9.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.9.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.9.0/firebase-auth-compat.js"></script>
-  <script>
-    const firebaseApp = firebase.initializeApp({
-      apiKey: "AIzaSyBybnwAFnoIbIbxbOQMLEHOaiO796YviRY",
-      projectId: "langara-wmdd4885-avengers"
-    });
-
-    const db = firebaseApp.firestore();
-  </script>
+  <script src="js/livetracking.js"></script>
   <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFE6wLa6xJlZesSSLEH1TyntvwJyqJXMw&callback=init"></script>
-  <script src="scriptfriend.js"></script>
+
 
 </body>
 

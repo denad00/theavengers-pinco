@@ -22,7 +22,6 @@
 /* MEDIA ========================= */
 @import "partials/media";
 
-
 /* TYPOGRAPHY ========================= */
 @import "partials/typography";
 
@@ -30,7 +29,7 @@
 @import "partials/signup-signin";
 
 /* HEADER-FOOTER ========================= */
-@import "partials/header-footer";
+@import "partials/header-footer"; 
 
 /* NAVIGATION ========================= */
 @import "partials/navigation";
@@ -51,6 +50,8 @@
 @import "partials/pre-recorded-call-homepage";
 @import "partials/pre-recorded-call";
 
+/* ACCOUNT ==================== */
+@import "partials/account";
 
 @import "partials/print";
 @import "partials/forms";

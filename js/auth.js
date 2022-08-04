@@ -31,7 +31,7 @@
     
     } else {
 
-      auth.createUserWithEmailAndPassword(email, password).then(res => {
+       auth.createUserWithEmailAndPassword(email, password).then((res) => {
         errorBox.style.display = "none";
         let user = auth.currentUser;
         if(user != null) {
@@ -45,10 +45,8 @@
           displayName: userName,
           photoURL: '',
         }).then(() => {
-          db.collection("user").add({uid: uid, phoneNumber: userPhone, sosEvent: false, email: email}).then(() =>{
-            setTimeout(function(){
-              window.location.replace("../index.html");
-          }, 1000)
+          db.collection("user").doc(uid).set({uid: uid, phoneNumber: userPhone, sosEvent: false, email: email}).then(() =>{
+              window.location.replace("index.html");
           })
         })
       }).catch(error => {
@@ -100,11 +98,10 @@
   }
 
   const initializeApp = () => {
-    auth.onAuthStateChanged(function(user) {
-      if (user) {
-         window.location.replace('index.html');
-      }
-    })
+    let user = localStorage.getItem('user')
+    if(user != "null") {
+      window.location.replace('index.html');
+    } 
 
     const signInForm = document.getElementById('signin-form');
     const signUpForm = document.getElementById('signup-form');
