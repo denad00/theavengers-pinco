@@ -98,11 +98,10 @@
   }
 
   const initializeApp = () => {
-    auth.onAuthStateChanged(function(user) {
-      if (user) {
-        window.location.replace('index.html');
-      }
-    })
+    let user = localStorage.getItem('user')
+    if(user != "null") {
+      window.location.replace('index.html');
+    } 
 
     const signInForm = document.getElementById('signin-form');
     const signUpForm = document.getElementById('signup-form');

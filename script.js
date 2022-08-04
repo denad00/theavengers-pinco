@@ -8,24 +8,33 @@ let userData = {}
 
 let lat = 0,lang =0;
 
+window.onload = function() {
+  initializeApp();
+};
 
-firebaseApp.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    userData = user
-    setInterval(() => {
-      checkSosFriends()
-    },1000);
 
-  } else {
-    window.location.replace('signin.html')
-  }
-});
+function initializeApp () {
+  firebaseApp.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      userData = user
+      setInterval(() => {
+        checkSosFriends()
+      },3000);
+  
+    } else {
+      window.location.replace('signin.html')
+    }
+  });
+}
 
 const checkSosFriends = () => {
   db.collection('user').where('uid','==',userData.multiFactor.user.uid).get().then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
       const userMeta = doc.data()
       userData = {...userData, phone: userMeta.phoneNumber}
+      document.getElementById('accountdisplayName').value =  userData.multiFactor.user.displayName
+      document.getElementById('accountemail').value = userData.multiFactor.user.email
+      document.getElementById('phone').value = userData.phone
       initializeEmergencyLocationSharing()
     })
   })
@@ -231,7 +240,8 @@ let userStatus = db.collection("userStatus");
 let userStatusRef = null
 
 sosEvent.addEventListener ("click", function(event) {
-    userStatus.where("userID", "==", "ictestnotif01").get().then((querySnapshot) => {
+  event.preventDefault();
+    userStatus.where("userID", "==", userData.multiFactor.user.uid).get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             userStatusRef = userStatus.doc(doc.id);
             console.log(doc.data());
@@ -296,6 +306,48 @@ const trackLocation = ({ onSuccess, onError = () => { } }) => {
   });
 };
 
+function CenterControl(controlDiv, map) {
+  const controlUI = document.createElement("div");
+
+  controlUI.style.backgroundColor = "#fff";
+  controlUI.style.border = "2px solid #fff";
+  controlUI.style.borderRadius = "3px";
+  controlUI.style.boxShadow = "0 2px 6px rgba(0,0,0,.3)";
+  controlUI.style.cursor = "pointer";
+  controlUI.style.marginTop = "8px";
+  controlUI.style.marginBottom = "22px";
+  controlUI.style.textAlign = "center";
+  controlUI.title = "Click to recenter the map";
+  controlDiv.appendChild(controlUI);
+
+  const controlText = document.createElement("div");
+  controlText.style.color = "rgb(25,25,25)";
+  controlText.style.fontFamily = "Roboto,Arial,sans-serif";
+  controlText.style.fontSize = "16px";
+  controlText.style.lineHeight = "38px";
+  controlText.style.paddingLeft = "5px";
+  controlText.style.paddingRight = "5px";
+  controlText.innerHTML = "SHARE LOCATION";
+  controlUI.appendChild(controlText);
+  let modal = document.getElementById("myModal")
+  let span = document.getElementsByClassName("close")[0];
+  // Setup the click event listeners: simply set the map to Chicago.
+  controlUI.addEventListener("click", () => {
+    modal.style.display = "block"
+    document.getElementById("shareableLink").innerText = window.location.hostname+'/livetracking.html?id='+userData.multiFactor.user.uid
+  });
+
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }  
+  
+}
 
 function init () {
   destLat = 49.238093;
@@ -309,6 +361,13 @@ function init () {
   google.maps.event.addListenerOnce(map, 'tilesloaded', function() {
     map.setZoom(12); // call initCoords()
   });
+
+  const centerControlDiv = document.createElement("div");
+
+  CenterControl(centerControlDiv, map);
+
+  map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
+
   const initialPosition = { lat: 49.238093, lng: -123.189117 };
   const marker = createMarker(map, initialPosition)
 
@@ -340,11 +399,6 @@ function createMarker(map, position) {
 
 
 /* ========================= ACCOUNT =======================*/
-
-document.getElementById('accountdisplayName').value =  userData.multiFactor.user.displayName
-document.getElementById('accountemail').value = userData.multiFactor.user.email
-document.getElementById('phone').value = userData.phone
-
 
 let camera_button = document.querySelector("#start-camera");
 let video = document.querySelector("#video");
