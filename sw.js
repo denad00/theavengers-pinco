@@ -8,10 +8,15 @@ self.addEventListener('fetch', event => {
 
 
 const cacheName = "v2";
-const urlsToCache = [ "/","/index.html","/livetracking.html",
-  "/checkin.js", "/contact.js","/script.js","/prerecorded-calls.js","/sos-button.js","/spa.js","/app.webmanifest", "css/style.css",
+const urlsToCache = [ "/","/index.html",
+  "/contact.js","/script.js","/app.webmanifest", "sass/css/style.css",
   "/icons/icon-192x192.png", "/icons/icon-512x512.png",
   "/signin.html", "signup.html",];
+
+//   const urlsToCache = [ "/","/index.html","/livetracking.html",
+//   "/checkin.js", "/contact.js","/script.js","/prerecorded-calls.js","/sos-button.js","/spa.js","/app.webmanifest", "css/style.css",
+//   "/icons/icon-192x192.png", "/icons/icon-512x512.png",
+//   "/signin.html", "signup.html",];
 
   console.log(urlsToCache)
 // NEVER cache service worker itself ( don't include sw.js in the array)
