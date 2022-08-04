@@ -1,0 +1,108 @@
+#page4 {
+    
+    h2{
+        padding: 1rem 5%;
+    }
+
+
+    .contactFlow {
+        p {
+            font-size: 1rem;
+            color: $font-color-grey;
+            padding-bottom: 1rem;
+            padding: 1rem 5%;
+        }
+
+        #createBtn {
+            display: block;
+            text-align: center;
+            padding: .5rem 3rem;
+            width: 90%;
+            font-size: 1.2rem;
+            margin: auto;
+        }
+
+        #createBtn:hover,
+        button:hover {
+            background-color:$color-hover;
+            color: $font-color-dark;
+        }
+
+        h3 {
+            margin-top: 1.5rem;
+            text-align: center;
+            background-color: rgb(213, 213, 213);
+            padding: .5rem;
+        }
+        #emergencyContactsOutput {
+            display: flex;
+            flex-flow: column nowrap;
+        }
+
+        li {
+            list-style-type: none;
+            border-bottom: 1px $font-color-grey solid;
+            margin: .5rem 2rem;
+            text-align: center;
+        }
+
+        #sendsms {
+            margin: .5rem 2rem;
+            background-color: $color-main-dark;
+            color: $font-color-light;
+            border-radius: 10px;
+            padding: 0.3rem 0.5rem;
+            text-decoration: none;
+        }
+
+        #sendsms:hover {
+            color: $font-color-dark;
+            background-color:$color-hover;
+        }
+
+        .sendsmsContainer {
+            display: flex;
+            justify-content: center;
+        }
+
+        li {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: flex-start;
+            button {
+                background-color: white;
+                .star {
+                    height: 20px;
+                    width: 20px;
+                }
+
+                .trash {
+                    height:20px;
+                    width: 20px;
+                }
+            &:hover {
+                cursor: pointer;
+            }
+            }
+        }
+
+
+        #emergencyContactsOutput {
+            li {
+                button {
+                    .star {
+                        fill: $color-hover;
+                    }
+                }
+            }
+        }
+
+    }
+
+    .submitArea{
+
+        button:nth-of-type(1):hover {
+            background-color: grey;
+        }
+    }
+}

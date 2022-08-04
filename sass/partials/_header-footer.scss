@@ -1,0 +1,41 @@
+#homepage .headerbar {
+    background-image: url(../../img/desktop-topbar.png);
+    background-size: 100% 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem 2%;
+
+    #menu_toggle {
+        box-shadow: none;
+        border: none;
+        color: $font-color-light;
+        background-color: $color-main;
+        font-size: 2rem;
+
+        &:hover{
+            cursor: pointer;
+        }
+    }
+
+    .header-logo {
+        display: flex;
+        align-items: center;
+
+        svg{
+            height: 42px;
+            width: 42px;
+        }
+
+        h1 {
+            color: $font-color-light;
+            font-size: 1.5rem;
+        }
+    }
+
+    #sosButton a img {
+        max-width: 30px;
+        width: 30px;
+    }
+
+}

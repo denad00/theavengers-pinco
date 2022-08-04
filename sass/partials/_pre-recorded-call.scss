@@ -1,0 +1,111 @@
+#prerecorded-calls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../../img/pin.co_background_graident-04.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+
+    main {
+        background-color: rgba(0, 0, 0, 0.733);
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: center;
+
+        .name-container{
+            // margin-bottom: 15rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: $font-color-light;
+        }
+
+        .navigation {
+            #close {
+                
+            }
+        }
+    }
+    .call-container {
+        display: flex;
+        flex-flow: column nowrap;
+        gap:1rem;
+
+        .play-navigation {
+            display: flex;
+            flex-flow: row nowrap;
+            gap: 1.5rem;
+        }
+
+        .navigation {
+            display: flex;
+            flex-flow: row nowrap;
+            gap: 1.5rem;
+        }
+
+        button {
+            border-radius: 50%;
+            box-shadow: none;
+            border: none;
+            height: 100px;
+            width: 100px;
+            text-align: center;
+            background-color:rgba(0, 0, 0, 0.719);;
+
+            svg {
+                height: 55px;
+                width: 55px;
+                fill: $font-color-light;
+            }
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        #prev {
+            svg{
+                padding-top: .5rem;
+                padding-right: .5rem;
+            }
+        }
+
+        #play, #next {
+            svg {
+                padding-top: .5rem;
+                padding-left: .5rem;
+            }
+        }
+
+        #sos {
+            background-color: transparent;
+
+            svg {
+                height: 100px;
+                width: 100px;
+                fill: $font-color-dark;
+                padding-right: .3rem;
+            }
+        }
+
+        #speaker {
+            background-color: $font-color-light;
+            svg{
+                padding-top: .5rem;
+                fill: $font-color-dark;
+            }
+        }
+
+        #close {
+            svg {
+                padding-top: .5rem;
+            }
+        }
+    }
+
+}

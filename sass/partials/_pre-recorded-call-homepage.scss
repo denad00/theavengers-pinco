@@ -1,0 +1,54 @@
+#page3 {
+    padding: 1rem 5%;
+    width: 800px;
+    margin: auto;
+    
+    .simulation-title p {
+        font-size: .89rem;
+        color: $font-color-grey;
+    }
+
+    ul {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: .25rem;
+        padding-inline-start: 0;
+
+        li {
+            list-style-type: none;
+            padding: .5rem 3%;
+            background-color: $div-background-color;
+            border-radius: 3px;
+            box-shadow: 0 1px 2px $box-shadow-color;
+
+            a {
+                display: flex;
+                flex-flow: row nowrap;
+                gap: 1rem;
+                text-decoration: none;
+                color: $font-color-dark;
+                font-family: $header-font;
+                font-weight: bold;
+                font-size: 1.25rem;
+            }
+
+            &:hover {
+                background-color: $background-color-light;
+            }
+        }
+
+    svg {
+        width: 20px;
+        height: 20px;
+    }
+    
+    
+
+}
+}
+
+#page4 {
+    padding-top: 3rem;
+    width: 800px;
+    margin: auto;
+}
