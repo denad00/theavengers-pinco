@@ -341,6 +341,11 @@ function createMarker(map, position) {
 
 /* ========================= ACCOUNT =======================*/
 
+document.getElementById('accountdisplayName').value =  userData.multiFactor.user.displayName
+document.getElementById('accountemail').value = userData.multiFactor.user.email
+document.getElementById('phone').value = userData.phone
+
+
 let camera_button = document.querySelector("#start-camera");
 let video = document.querySelector("#video");
 let click_button = document.querySelector("#click-photo");
