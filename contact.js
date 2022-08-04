@@ -9,7 +9,7 @@ const contactPageUserId = contactPageUserObj.uid;
 const allFlows = document.querySelectorAll('div.contactFlow')
 const otherContactsOutput = document.getElementById("otherContactsOutput");
 const emergencyContactsOutput = document.getElementById("emergencyContactsOutput");
-console.log(allFlows)
+
 allFlows[0].style.display = 'block';
 allFlows[1].style.display = 'none';
 if (allFlows[0].style.display = 'block') {
@@ -26,6 +26,8 @@ function navigationFlow(event){
 
 // get boolean data of "emergency contact"
 const cb = document.querySelector('#emergencyAccept');
+
+const contactSubmit = document.getElementById("submitContact");
 
 // define submit function
 contactSubmit.addEventListener ("click", function(event) {
@@ -52,6 +54,13 @@ allFlows[1].style.display = 'none';
 
   
 });
+
+const cancelContact = document.getElementById("cancelContact");
+
+cancelContact.addEventListener ("click", function(event) {
+  allFlows[0].style.display = 'block';
+  allFlows[1].style.display = 'none';
+})
 
 
 //define function to generate contact list by firestore library method
