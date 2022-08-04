@@ -3,19 +3,7 @@ let map,destinationLocation;
 let destLat, destLng;
 let markers = [];
 
-const firebaseApp = firebase.initializeApp({ 
-  apiKey: "AIzaSyBybnwAFnoIbIbxbOQMLEHOaiO796YviRY",
-  authDomain: "langara-wmdd4885-avengers.firebaseapp.com",
-  databaseURL: "https://langara-wmdd4885-avengers-default-rtdb.firebaseio.com",
-  projectId: "langara-wmdd4885-avengers",
-  storageBucket: "langara-wmdd4885-avengers.appspot.com",
-  messagingSenderId: "1078303270426",
-  appId: "1:1078303270426:web:d7a2c3b43fd70e113053a3",
-  measurementId: "G-F4KJKNQE5T"
-});
 
-const db = firebaseApp.firestore();
-const auth = firebaseApp.auth();
 let userData = {}
 
 let lat = 0,lang =0;
@@ -232,162 +220,6 @@ const updateCheckInInterval = setInterval(checkInHelper, 1000);
 /* ============================== CHECKIN END ================================ */
 
 
-/* ============================== CONTACT ==================================== */
-
-
-// init database
-const contactCollection = db.collection("contact")
-
-const allFlows = document.querySelectorAll('div.contactFlow')
-const otherContactsOutput = document.getElementById("otherContactsOutput");
-const emergencyContactsOutput = document.getElementById("emergencyContactsOutput");
-allFlows[0].style.display = 'block';
-allFlows[1].style.display = 'none';
-if (allFlows[0].style.display = 'block') {
-  updateContactsListHTML("ictestnotif01");
-}  //show current contact list
-
-const createBtn = document.getElementById("createBtn");
-createBtn.addEventListener ("click", navigationFlow);
-
-function navigationFlow(event){
-  allFlows[0].style.display = 'none';
-  allFlows[1].style.display = 'block';
-}
-
-// get boolean data of "emergency contact"
-const cb = document.querySelector('#emergencyAccept');
-
-// define submit function
-contactSubmit.addEventListener ("click", function(event) {
-  event.preventDefault();
-  const contact = {
-    name: contactName.value, //from html id
-    phone: contactPhone.value, //from html id
-    emergencyContact: cb.checked, //from html checkbox
-    userID: userData.multiFactor.user.uid, 
-    contactID: Math.floor(Math.random() * Math.floor(Math.random() * Date.now()))  //generate contact id
-  }
-    //get user id by firebase doc and add contact into firebase collection-contact by calling function getUserContactsList
-  const outcome = contactCollection.add(contact)
-.then((docRef) => {
-    updateContactsListHTML("ictestnotif01");
-})
-.catch((error) => {
-    console.error("Error adding document: ", error);
-});
-allFlows[0].style.display = 'block';
-allFlows[1].style.display = 'none';
-
-
-  
-});
-
-
-//define function to generate contact list by firestore library method
-// userId: string, nextAction: function
-function getUserContactsList (userId, isEmergency, nextAction) { 
-    let contactsOfUser = [];
-    const q = contactCollection.where("userID", "==", userId).where("emergencyContact", "==", isEmergency).get()
-        .then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                // console.log(doc.data());
-                // console.log(doc.id);
-                let contactObj = doc.data();
-                contactObj["docID"] = doc.id
-                contactsOfUser.push(contactObj); //.data is a firestore method to get query object data 
-            });
-
-            nextAction(contactsOfUser, isEmergency);
-        })
-        .catch((error) => {
-            console.log("Error getting documents: ", error);
-        });
-}
-
-
-//define function to print out List of contact into html
-// contactsList: array
-function generateContactsListHTML (contactsList, isEmergency) {
-  let contactListOutputElement = null;
-  if (isEmergency) {
-    contactListOutputElement = document.getElementById("emergencyContactsOutput");
-  } else {
-    contactListOutputElement = document.getElementById("otherContactsOutput");
-  }
-  contactListOutputElement.innerHTML = "";
-  console.log("[contact.js updateContactsListHTML] listLength: " + contactsList.length);
-  for (let i = 0; i < contactsList.length; i++) {
-    
-    let text = ""
-    text += contactsList[i].name
-    text += "\n"
-    text += contactsList[i].phone
-    let line = document.createElement('li');
-    line.innerText += text
-    contactListOutputElement.appendChild(line);
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Delete";
-    line.appendChild(deleteBtn);
-
-    contactListOutputElement.appendChild(line);
-    const starBtn = document.createElement("button");
-    starBtn.textContent = "star";
-    line.prepend(starBtn);
-
-    deleteBtn.addEventListener('click', (event) => {
-      // console.log('delete index: ' + i + "\ncontactList[i]: " + contactsList[i].docID);
-      contactCollection.doc(contactsList[i].docID).delete().then(() => {    
-        updateContactsListHTML(contactsList[i].userID);
-        console.log("Document successfully deleted!");
-        }).catch((error) => {
-            console.error("Error removing document: ", error);
-      });
-		});
-
-    starBtn.addEventListener('click', (event) => {
-      console.log({ emergencyContact: !contactsList[i].emergencyContact });
-      contactCollection.doc(contactsList[i].docID).update({ emergencyContact: !contactsList[i].emergencyContact }).then(() => {    
-        updateContactsListHTML(contactsList[i].userID);
-        console.log("Emergency contacts update successfully!");
-       }).catch((error) => {
-        console.error("Error updating emergency contacts: ", error);
-    });
-
-    
-      
-		});
-
-   
-    // otherContactsOutput.innerHTML += text
- }
-}
-
-function changeEmergencyContactList() {
-
-  const q = contactCollection.where("emergencyContact", "==", false).get()
-  .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-          console.log(doc.data());
-          // console.log(doc.id);
-          let emergencyStatus = emergencyContact;
-          // emergencyStatus = true;
-          console.log(emergencyStatus);
-      });
-  // let emergencyContact = 'emergencyContact';
-  // if (emergencyContact)
-  // emergencyContact = false;
-  // else {
-  //   emergencyContact = true
-  })
-    
-}
-
-function updateContactsListHTML (userID) {
-  getUserContactsList(userID, false, generateContactsListHTML);
-  getUserContactsList(userID, true, generateContactsListHTML);
-}
-
 /* ========================= CONTACT END =======================*/
 
 
@@ -428,37 +260,8 @@ sosEvent.addEventListener ("click", function(event) {
 
 /* =========================== PRERECORDED END =========================== */
 
-
-function init () {
-  destLat = 49.238093;
-  destLng = -123.189117;
-  destinationLocation = new google.maps.LatLng(destLat, destLng);
-  map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 12,
-    center: destinationLocation
-  });
-  const initialPosition = { lat: 49.238093, lng: -123.189117 };
-  createMarker(map, initialPosition)
-}
-
-function createMarker(map, position) {
-  return new google.maps.Marker({ map, position });
-};
-
-
-/*
 const liveLocationCollection = db.collection("liveLocationSharing");
 
-const createMap = ({ lat, lng }) => {
-  return new google.maps.Map(document.getElementById('map'), {
-    center: { lat, lng },
-    zoom: 15
-  });
-};
-
-const createMarker = ({ map, position }) => {
-  return new google.maps.Marker({ map, position });
-};
 
 const getCurrentPosition = ({ onSuccess, onError = () => { } }) => {
   if ('geolocation' in navigator === false) {
@@ -494,32 +297,47 @@ const trackLocation = ({ onSuccess, onError = () => { } }) => {
 };
 
 
-function init() {
-  const initialPosition = { lat: 59.325, lng: 18.069 };
-  const map = createMap(initialPosition);
-  const marker = createMarker({ map, position: initialPosition });
+function init () {
+  destLat = 49.238093;
+  destLng = -123.189117;
+  destinationLocation = new google.maps.LatLng(destLat, destLng);
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 12,
+    center: destinationLocation
+  });
+
+  google.maps.event.addListenerOnce(map, 'tilesloaded', function() {
+    map.setZoom(12); // call initCoords()
+  });
+  const initialPosition = { lat: 49.238093, lng: -123.189117 };
+  const marker = createMarker(map, initialPosition)
 
 
   trackLocation({
-    onSuccess: (data) => {
-      console.log(data);
-      //{ coords: { latitude: lat, longitude: lng } }
-      marker.setPosition({ lat, lng });
-      map.panTo({ lat, lng });
+    onSuccess: ({ coords: { latitude: lat, longitude: lng } }) => {
+    
+      marker.setPosition({ lat , lng });
+      map.panTo({ lat , lng });
 
       liveLocationCollection.add({
-        active: true,
         latitude: lat,
         longitude: lng,
         time: new Date(),
         userID: userData.multiFactor.user.uid
-      }) 
+      })  
     },
     onError: err => {
 
     }
   });
-}*/
+}
+
+function createMarker(map, position) {
+  return new google.maps.Marker({ map, position });
+};
+
+
+
 
 /* ========================= ACCOUNT =======================*/
 

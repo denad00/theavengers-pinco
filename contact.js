@@ -1,5 +1,5 @@
 
-// init database
+
 const contactCollection = db.collection("contact");
 
 const contactPageUserJson = localStorage.getItem('user');
