@@ -9,28 +9,11 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;700&family=Work+Sans:wght@400;600;700&display=swap"
     rel="stylesheet">
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
   <script src="https://static.vancdn.com/public/js/jquery/jquery-1.12.4.min.js?v=27"></script>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css'
     integrity='sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=='
     crossorigin='anonymous' referrerpolicy='no-referrer' />
-
-  <script>
-    const firebaseApp = firebase.initializeApp({
-      apiKey: "AIzaSyBybnwAFnoIbIbxbOQMLEHOaiO796YviRY",
-      projectId: "langara-wmdd4885-avengers"
-    });
-    const db = firebaseApp.firestore();
-    const auth = firebaseApp.auth();
-
-  </script>
-  <script src="checkin.js" defer></script>
-  <script src="contact.js" defer></script>
-  <script src="sos-button.js" defer></script>
   <script src="prerecorded-calls.js" defer></script>
-  <script src="spa.js" defer></script>
   <link rel="manifest" href="app.webmanifest">
   <script>
     // does the browser support service workers?
@@ -57,7 +40,7 @@
       console.warn('Service Worker not available');
     }
   </script>
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="sass/css/style.css">
 
   <style>
     .container {
@@ -154,8 +137,7 @@
     <div class="nav-bar" id="menu">
       <div class="menu-top">
         <div class="menu-profile">
-          <div class="menu-profile-photo">
-          </div>
+          <img class="menu-profile-photo" />
           <p>User</p>
         </div>
         <!-- header area shared among all pages. It also include navigation buttons -->
@@ -484,6 +466,42 @@
     </div>
   </div>
 
+  <div class="page" id="page5">
+    <h1>My Account</h1>
+    <div class="account-form">
+      <div id="camerasetup">
+        <div class="video-block" id="video-block">
+          <video id="video" autoplay></video>
+          <canvas id="canvas" width="200" height="200"></canvas>
+        </div>
+        <div class="camera-controls">
+          <button id="start-camera">Start Camera</button>
+          <button id="camera_stop" style="display:none;">Stop Camera</button>
+          <button id="click-photo" style="display:none;">Click Photo</button>
+          <button id="upload_photo" style="display:none;">Upload Photo</button>
+        </div>
+      </div>
+      <form method="post" id="account">
+        <div class="form-group">
+          <label for="accountdisplayName">Display Name*:</label>
+          <input type="text" id="accountdisplayName" placeholder="Enter your name here" required>
+        </div>
+        <div class="form-group">
+          <label for="accountemail">Email*:</label>
+          <input type="email" id="accountemail" placeholder="Enter your email here" required disabled>
+        </div>
+        <div class="form-group">
+          <label for="accountpassword">Password*:</label>
+          <input type="password" id="accountpassword" placeholder="Enter your password" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number*:</label>
+          <input type="tel" id="phone" pattern="[0-9]{10}" placeholder="2334455667" required />
+        </div>
+        <button type="submit" id="saveAccount">Save</button>
+      </form>
+    </div>
+  </div>
 
   </main>
   <footer class="footer">
@@ -496,12 +514,29 @@
       window.location.replace('signin.html');
     })
   </script>
-  <script src="https://www.gstatic.com/firebasejs/9.9.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.9.0/firebase-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.9.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.9.0/firebase-auth-compat.js"></script>
+  <script>
+    const firebaseApp = firebase.initializeApp({
+      apiKey: "AIzaSyBybnwAFnoIbIbxbOQMLEHOaiO796YviRY",
+      authDomain: "langara-wmdd4885-avengers.firebaseapp.com",
+      databaseURL: "https://langara-wmdd4885-avengers-default-rtdb.firebaseio.com",
+      projectId: "langara-wmdd4885-avengers",
+      storageBucket: "langara-wmdd4885-avengers.appspot.com",
+      messagingSenderId: "1078303270426",
+      appId: "1:1078303270426:web:d7a2c3b43fd70e113053a3",
+      measurementId: "G-F4KJKNQE5T"
+    });
+
+    const db = firebaseApp.firestore();
+    const auth = firebaseApp.auth();
+  </script>
+  <script src="script.js"></script>
+  <script src="contact.js"></script>
   <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFE6wLa6xJlZesSSLEH1TyntvwJyqJXMw&callback=init"></script>
-  <script defer src="script.js"></script>
+
 </body>
 
 </html>
