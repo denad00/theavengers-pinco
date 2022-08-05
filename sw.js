@@ -1,84 +1,91 @@
+/*
+Copyright 2015, 2019, 2020, 2021 Google LLC. All Rights Reserved.
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ http://www.apache.org/licenses/LICENSE-2.0
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+*/
 
-self.addEventListener('fetch', event => {
-    // Fires whenever the app requests a resource (file or data)  normally this is where the service worker would check to see
-    // if the requested resource is in the local cache before going to the server to get it. 
-    console.log(`[SW] Fetch event for ${event.request.url}`);
+// Incrementing OFFLINE_VERSION will kick off the install event and force
+// previously cached resources to be updated from the network.
+// This variable is intentionally declared and unused.
+// Add a comment for your linter if you want:
+// eslint-disable-next-line no-unused-vars
+const OFFLINE_VERSION = 1;
+const CACHE_NAME = "offline";
+// Customize this with a different URL if needed.
+const OFFLINE_URL = "offline.html";
 
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    (async () => {
+      const cache = await caches.open(CACHE_NAME);
+      // Setting {cache: 'reload'} in the new request ensures that the
+      // response isn't fulfilled from the HTTP cache; i.e., it will be
+      // from the network.
+      await cache.add(new Request(OFFLINE_URL, { cache: "reload" }));
+    })()
+  );
+  // Force the waiting service worker to become the active service worker.
+  self.skipWaiting();
 });
 
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    (async () => {
+      // Enable navigation preload if it's supported.
+      // See https://developers.google.com/web/updates/2017/02/navigation-preload
+      if ("navigationPreload" in self.registration) {
+        await self.registration.navigationPreload.enable();
+      }
+    })()
+  );
 
-const cacheName = "v2";
-const urlsToCache = [ "/","/index.html",
-  "/contact.js","/script.js","/app.webmanifest", "sass/css/style.css",
-  "/icons/icon-192x192.png", "/icons/icon-512x512.png",
-  "/signin.html", "signup.html",];
-
-//   const urlsToCache = [ "/","/index.html","/livetracking.html",
-//   "/checkin.js", "/contact.js","/script.js","/prerecorded-calls.js","/sos-button.js","/spa.js","/app.webmanifest", "css/style.css",
-//   "/icons/icon-192x192.png", "/icons/icon-512x512.png",
-//   "/signin.html", "signup.html",];
-
-  console.log(urlsToCache)
-// NEVER cache service worker itself ( don't include sw.js in the array)
-
-self.addEventListener('install', (event) => { // invoked when a browser installs this SW
-    // here we cache the resources that are defined in the urlsToCache[] array
-    console.log(`[SW] Event fired: ${event.type}`);
-    event.waitUntil(       // waitUntil tells the browser to wait for the input promise to finish
-		  caches.open( cacheName )		//caches is a global object representing CacheStorage
-			  .then( ( cache ) => { 			// open the cache with the name cacheName*
-				  return cache.addAll( urlsToCache );      	// pass the array of URLs to cache**. it returns a promise
-		}));
-    self.skipWaiting();  // it tells browser to activate this SW and discard old one immediately (useful during development)
-    console.log(`[SW] installed`);
+  // Tell the active service worker to take control of the page immediately.
+  self.clients.claim();
 });
 
-self.addEventListener('activate', (event) => { // invoked after the SW completes its installation. 
-    // It's a place for the service worker to clean up from previous SW versions
-    console.log(`[SW] Event fired: ${event.type}`);
-    event.waitUntil( deleteOldCache() )    // waitUntil tells the browser to wait for the input promise to finish
+self.addEventListener("fetch", (event) => {
+  // Only call event.respondWith() if this is a navigation request
+  // for an HTML page.
+  if (event.request.mode === "navigate") {
+    event.respondWith(
+      (async () => {
+        try {
+          // First, try to use the navigation preload response if it's
+          // supported.
+          const preloadResponse = await event.preloadResponse;
+          if (preloadResponse) {
+            return preloadResponse;
+          }
 
-    console.log(`[SW] activated`);
-});
+          // Always try the network first.
+          const networkResponse = await fetch(event.request);
+          return networkResponse;
+        } catch (error) {
+          // catch is only triggered if an exception is thrown, which is
+          // likely due to a network error.
+          // If fetch() returns a valid HTTP response with a response code in
+          // the 4xx or 5xx range, the catch() will NOT be called.
+          console.log("Fetch failed; returning offline page instead.", error);
 
-// iterates over cache entries for this site and delete all except the one matching cacheName
-async function deleteOldCache() {
-  const keyList = await caches.keys();
-  return Promise.all( keyList.map( ( key ) => {
-    if ( key !== cacheName  ) {    // compare key with the new cache Name in SW
-      return caches.delete( key );  // delete any other cache
-    }
-  }));
-}
-
-
-self.addEventListener('fetch', event => { // invoked whenever the app requests a resource (file or data) 
-    // this is where the service worker can have different strategies
-    // to use cache storage (if exists) or forward the request to server. 
-    console.log(`[SW] Fetch event for ${event.request.url}`);
-
-    //Option 1. No Strategy, forwards all requests (i.e. doesn't use Cache Storage - on offline support)
-    //event.respondWith(fetch(event.request));
-
-    //Option 2. see CACHE FIRST, THEN NETWORK below
-    //event.respondWith( CacheFirstThenNetworkStrategy(event) );
-
-    //Option 3. see NETWORK FIRST, THEN CACHE below
-    event.respondWith( NetworkFirstThenCacheStrategy(event) );
-
-});
-
-// CACHE FIRST, THEN NETWORK STRATEGY
-async function CacheFirstThenNetworkStrategy(event) {
-  const cachedResponse = await caches.match( event.request);
-  return cachedResponse || fetch( event.request );  // returns cachedResponse or server fetch  if no cachedResponse
-}
-
-// NETWORK FIRST, THEN CACHE STRATEGY
-async function NetworkFirstThenCacheStrategy(event) {
-  try {
-      return await fetch( event.request );  // returns server fetch
-  } catch(error) { 
-      return caches.match( event.request ); // returns cached response if server fetch fails (e.g. user is offline)
+          const cache = await caches.open(CACHE_NAME);
+          const cachedResponse = await cache.match(OFFLINE_URL);
+          return cachedResponse;
+        }
+      })()
+    );
   }
-}
+
+  // If our if() condition is false, then this fetch handler won't
+  // intercept the request. If there are any other fetch handlers
+  // registered, they will get a chance to call event.respondWith().
+  // If no fetch handlers call event.respondWith(), the request
+  // will be handled by the browser as if there were no service
+  // worker involvement.
+});
