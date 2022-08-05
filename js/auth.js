@@ -1,13 +1,12 @@
 (function() {
   const firebaseApp = firebase.initializeApp({ 
-    apiKey: "AIzaSyBybnwAFnoIbIbxbOQMLEHOaiO796YviRY",
-    authDomain: "langara-wmdd4885-avengers.firebaseapp.com",
-    databaseURL: "https://langara-wmdd4885-avengers-default-rtdb.firebaseio.com",
-    projectId: "langara-wmdd4885-avengers",
-    storageBucket: "langara-wmdd4885-avengers.appspot.com",
-    messagingSenderId: "1078303270426",
-    appId: "1:1078303270426:web:d7a2c3b43fd70e113053a3",
-    measurementId: "G-F4KJKNQE5T"
+    apiKey: "AIzaSyBVj4R-W5RBtynjYHMZG1IkW35EjDueroo",
+    authDomain: "pinco-f76a9.firebaseapp.com",
+    projectId: "pinco-f76a9",
+    storageBucket: "pinco-f76a9.appspot.com",
+    messagingSenderId: "1051696252552",
+    appId: "1:1051696252552:web:ab875fc585a1ba5086813d",
+    measurementId: "G-MX3M605MJ1"
   });
 
   const db = firebaseApp.firestore();

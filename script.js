@@ -1,72 +1,72 @@
-'use strict';
-let map,destinationLocation;
-let destLat, destLng;
-let markers = [];
+// 'use strict';
+// let map,destinationLocation;
+// let destLat, destLng;
+// let markers = [];
 
 
-let userData = {}
+// let userData = {}
 
-let lat = 0,lang =0;
+// let lat = 0,lang =0;
 
-window.onload = function() {
-  initializeApp();
-};
+// window.onload = function() {
+//   initializeApp();
+// };
 
 
-function initializeApp () {
-  firebaseApp.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      userData = user
-      setInterval(() => {
-        checkSosFriends()
-      },3000);
+// function initializeApp () {
+//   firebaseApp.auth().onAuthStateChanged(function(user) {
+//     if (user) {
+//       userData = user
+//       setInterval(() => {
+//         checkSosFriends()
+//       },3000);
   
-    } else {
-      window.location.replace('signin.html')
-    }
-  });
-}
+//     } else {
+//       window.location.replace('signin.html')
+//     }
+//   });
+// }
 
-const checkSosFriends = () => {
-  db.collection('user').where('uid','==',userData.multiFactor.user.uid).get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-      const userMeta = doc.data()
-      userData = {...userData, phone: userMeta.phoneNumber}
-      document.getElementById('accountdisplayName').value =  userData.multiFactor.user.displayName
-      document.getElementById('accountemail').value = userData.multiFactor.user.email
-      document.getElementById('phone').value = userData.phone
-      initializeEmergencyLocationSharing()
-    })
-  })
-}
+// const checkSosFriends = () => {
+//   db.collection('user').where('uid','==',userData.multiFactor.user.uid).get().then((querySnapshot) => {
+//     querySnapshot.forEach((doc) => {
+//       const userMeta = doc.data()
+//       userData = {...userData, phone: userMeta.phoneNumber}
+//       document.getElementById('accountdisplayName').value =  userData.multiFactor.user.displayName
+//       document.getElementById('accountemail').value = userData.multiFactor.user.email
+//       document.getElementById('phone').value = userData.phone
+//       initializeEmergencyLocationSharing()
+//     })
+//   })
+// }
 
-const initializeEmergencyLocationSharing = () =>{
-  db.collection('contact').where("phone", "==", userData.phone).where("emergencyContact", "==", true).get()
-    .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        const sosFriend = doc.data();
-        if(sosFriend) {
-          db.collection('userStatus').where('userID',"==",sosFriend.userID).where("sosEvent", "==", true).get().then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-              const contactdata =doc.data()
-              if(contactdata){
-                db.collection('liveLocationSharing').where('userID', '==', contactdata.userID).orderBy("time", "desc").limit(1).get().then((querySnapshot) => {
-                  querySnapshot.forEach((doc) => {
-                    const sosFriendData = doc.data();
-                    const position = { lat: Number(sosFriendData.latitude), lng: Number(sosFriendData.longitude) };
-                      createMarker(map, position)
-                      lat = position.lat
-                      lang= position.lng
+// const initializeEmergencyLocationSharing = () =>{
+//   db.collection('contact').where("phone", "==", userData.phone).where("emergencyContact", "==", true).get()
+//     .then((querySnapshot) => {
+//       querySnapshot.forEach((doc) => {
+//         const sosFriend = doc.data();
+//         if(sosFriend) {
+//           db.collection('userStatus').where('userID',"==",sosFriend.userID).where("sosEvent", "==", true).get().then((querySnapshot) => {
+//             querySnapshot.forEach((doc) => {
+//               const contactdata =doc.data()
+//               if(contactdata){
+//                 db.collection('liveLocationSharing').where('userID', '==', contactdata.userID).orderBy("time", "desc").limit(1).get().then((querySnapshot) => {
+//                   querySnapshot.forEach((doc) => {
+//                     const sosFriendData = doc.data();
+//                     const position = { lat: Number(sosFriendData.latitude), lng: Number(sosFriendData.longitude) };
+//                       createMarker(map, position)
+//                       lat = position.lat
+//                       lang= position.lng
                 
-                  })
-                })
-              }
-            })
-          })
-        }
-      })
- });
-}
+//                   })
+//                 })
+//               }
+//             })
+//           })
+//         }
+//       })
+//  });
+// }
 
 /* ==================== SPA =======================*/
 
