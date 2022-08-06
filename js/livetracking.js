@@ -96,7 +96,7 @@ const urlParams = new URLSearchParams(queryString);
 
 setTimeout(()=>{
 
-  db.collection('liveLocationSharing').where('userID', '==', urlParams.get('id')).where('liveLocation','==', true).orderBy("time", "desc").limit(1).get().then((querySnapshot) => {
+  db.collection('liveLocationSharing').where('userID', '==', urlParams.get('id')).orderBy("time", "desc").limit(1).get().then((querySnapshot) => {
     querySnapshot.forEach((doc) => {
       const sosFriendData = doc.data();
       console.log(sosFriendData)

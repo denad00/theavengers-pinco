@@ -14,7 +14,7 @@
     integrity='sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=='
     crossorigin='anonymous' referrerpolicy='no-referrer' />
   <script src="prerecorded-calls.js" defer></script>
-  <link rel="manifest" href="app.webmanifest">
+  <link rel="manifest" href="/app.webmanifest.json">
   <script>
     // does the browser support service workers?
     if ('serviceWorker' in navigator) {
@@ -137,8 +137,8 @@
     <div class="nav-bar" id="menu">
       <div class="menu-top">
         <div class="menu-profile">
-          <img class="menu-profile-photo" />
-          <p>User</p>
+          <img id="menu-profile-photo" class="menu-profile-photo" />
+          <p id="userDisplayName">User</p>
         </div>
         <!-- header area shared among all pages. It also include navigation buttons -->
         <div class="menu-main">
@@ -517,13 +517,6 @@
   <footer class="footer">
 
   </footer>
-  <script type="text/javascript">
-    document.getElementById('logout').addEventListener('click', (e) => {
-      firebaseApp.auth().signOut();
-      localStorage.setItem('user', null)
-      window.location.replace('signin.html');
-    })
-  </script>
   <script src="https://www.gstatic.com/firebasejs/9.9.0/firebase-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.9.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.9.0/firebase-auth-compat.js"></script>
@@ -542,9 +535,17 @@
     const db = firebaseApp.firestore();
     const auth = firebaseApp.auth();
   </script>
-  <script src="script.js"></script>
-  <script src="contact.js"></script>
-  <script src="sos-button.js"></script>
+  <script src="script.js?random=12345"></script>
+  <script src="contact.js?random=123"></script>
+  <script src="sos-button.js?random=12"></script>
+  <script type="text/javascript">
+    document.getElementById('logout').addEventListener('click', (e) => {
+      e.preventDefault()
+      firebaseApp.auth().signOut();
+      localStorage.setItem('user', JSON.stringify(null))
+      window.location.replace('signin.html');
+    })
+  </script>
   <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFE6wLa6xJlZesSSLEH1TyntvwJyqJXMw&callback=init"></script>
 

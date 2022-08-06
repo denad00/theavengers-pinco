@@ -69,6 +69,7 @@
         if(errorBox)
         error.style.display = "none";
         localStorage.setItem('user',JSON.stringify(res.user));
+        console.log("login")
         window.location.replace('index.html');
       }).catch((error) => {
 
@@ -98,8 +99,8 @@
   }
 
   const initializeApp = () => {
-    let user = localStorage.getItem('user')
-    if(user != "null") {
+    let user = JSON.parse(localStorage.getItem('user'))
+    if(user != null) {
       window.location.replace('index.html');
     } 
 

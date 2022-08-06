@@ -8,19 +8,17 @@ let userData = {}
 
 let lat = 0,lang =0;
 
+
 window.onload = function() {
   initializeApp();
 };
 
 
-function initializeApp () {
-  firebaseApp.auth().onAuthStateChanged(function(user) {
+async function initializeApp () {
+  await firebaseApp.auth().onAuthStateChanged(function(user) {
     if (user) {
       userData = user
-      setInterval(() => {
-        checkSosFriends()
-      },3000);
-  
+      checkSosFriends()
     } else {
       window.location.replace('signin.html')
     }
@@ -34,8 +32,13 @@ const checkSosFriends = () => {
       userData = {...userData, phone: userMeta.phoneNumber}
       document.getElementById('accountdisplayName').value =  userData.multiFactor.user.displayName
       document.getElementById('accountemail').value = userData.multiFactor.user.email
+      document.getElementById('menu-profile-photo').src = userData.multiFactor.user.photoURL
+      document.getElementById('userDisplayName').innerHTML = userData.multiFactor.user.displayName
       document.getElementById('phone').value = userData.phone
-      initializeEmergencyLocationSharing()
+      setInterval(() => {
+        initializeEmergencyLocationSharing()
+      },3000);
+      
     })
   })
 }
@@ -442,17 +445,22 @@ account.addEventListener('submit',(e) =>{
   let email = document.getElementById('accountemail').value
   let password = document.getElementById('accountpassword').value
   let phone = document.getElementById('phone').value
+  //let refDoc = db.collection("user").where("uid",'==',userData.multiFactor.user.uid)
 
-  db.collection("user").doc(userData.multiFactor.user.uid).update({uid: userData.multiFactor.user.uid, phoneNumber: phone, email: email}).then(() =>{
-    auth.currentUser.updateProfile({
-      displayName: displayName
-    }).then(() =>{
-      auth.updatePassword(password).then(() => {
-        // Update successful.
-      }, (error) => {
-        // An error happened.
-      });
-    })
+  auth.currentUser.updateProfile({
+    displayName: displayName
+  }).then(() =>{
+    firebaseApp.auth().currentUser.updatePassword(password).then(() => {
+      // Update successful.
+    }, (error) => {
+      // An error happened.
+    });
   })
+
+  /*refDoc.get().then((thisDoc) =>{
+    refDoc.update({uid: userData.multiFactor.user.uid, phoneNumber: phone, email: email})
+
+
+  }) */
 
 })
